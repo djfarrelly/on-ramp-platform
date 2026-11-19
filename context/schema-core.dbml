@@ -1,0 +1,108 @@
+Project onramp_core {
+  database_type: 'PostgreSQL'
+  Note: 'On-Ramp core tables. Simplified for presentation — full model in onramp-schema.dbml'
+}
+
+Table organizations {
+  id uuid [pk]
+  display_name text
+  organization_type_id uuid
+  parent_organization_id uuid [ref: > organizations.id]
+  crm_id text
+  status text
+  last_verified_at timestamptz
+}
+Table locations {
+  id uuid [pk]
+  organization_id uuid [ref: > organizations.id]
+  city text
+  region text
+  latitude decimal
+  longitude decimal
+}
+Table offerings {
+  id uuid [pk]
+  organization_id uuid [ref: > organizations.id]
+  kind text
+  name text
+  cost_text text
+  access_level text
+  status text
+}
+Table events {
+  id uuid [pk]
+  organization_id uuid [ref: > organizations.id]
+  offering_id uuid [ref: > offerings.id]
+  name text
+  starts_at timestamptz
+  source_id uuid [ref: > sources.id]
+  status text
+}
+Table lanes {
+  id uuid [pk]
+  slug text
+  name text
+}
+Table offering_lanes {
+  offering_id uuid [ref: > offerings.id]
+  lane_id uuid [ref: > lanes.id]
+  is_primary boolean
+}
+Table tags {
+  id uuid [pk]
+  slug text
+  group_label text
+}
+Table offering_tags {
+  offering_id uuid [ref: > offerings.id]
+  tag_id uuid [ref: > tags.id]
+}
+Table sources {
+  id uuid [pk]
+  organization_id uuid [ref: > organizations.id]
+  kind text
+  url text
+  auto_apply_policy text
+}
+Table source_runs {
+  id uuid [pk]
+  source_id uuid [ref: > sources.id]
+  status text
+  items_proposed int
+  estimated_cost_cents int
+}
+Table intake_sessions {
+  id uuid [pk]
+  anon_id uuid
+  lane_id uuid [ref: > lanes.id]
+  answers jsonb
+  status text
+}
+Table routing_results {
+  id uuid [pk]
+  session_id uuid [ref: > intake_sessions.id]
+  organization_id uuid [ref: > organizations.id]
+  offering_id uuid [ref: > offerings.id]
+  rank int
+  explanation jsonb
+}
+Table referrals {
+  id uuid [pk]
+  session_id uuid [ref: > intake_sessions.id]
+  routing_result_id uuid [ref: > routing_results.id]
+  organization_id uuid [ref: > organizations.id]
+  outcome text
+  confirmed_at timestamptz
+}
+
+// ─── External system — not part of this database ───
+Table middle_third_crm [headercolor: #a16207] {
+  record_id text [pk, note: 'What organizations.crm_id points at']
+  relationship_history text
+  internal_contacts text
+  agreements_and_mous text
+  meeting_notes text
+  Note: 'EXTERNAL — Middle Third CRM. Separate system, owned by Middle Third. The platform stores a reference ID only; no integration and no data sync.'
+}
+
+Ref: organizations.crm_id > middle_third_crm.record_id

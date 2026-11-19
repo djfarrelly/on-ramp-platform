@@ -1,0 +1,364 @@
+{
+  "organizations": {
+    "count": 61,
+    "statuses": {
+      "published": 8,
+      "pending_review": 53
+    },
+    "populated": {
+      "short_description": 61,
+      "long_description": 61,
+      "organization_type_id": 0,
+      "parent_organization_id": 0,
+      "last_verified_at": 8
+    }
+  },
+  "offerings": {
+    "count": 54,
+    "statuses": {
+      "published": 7,
+      "pending_review": 47
+    },
+    "populated": {
+      "description": 54,
+      "summary": 54,
+      "delivery_mode": 0,
+      "cost_text": 4,
+      "is_free": 0,
+      "access_level": 0,
+      "eligibility_summary": 10,
+      "duration_text": 3,
+      "schedule_text": 1,
+      "credential_type": 0,
+      "prerequisites": 0,
+      "apply_url": 0,
+      "last_verified_at": 7
+    }
+  },
+  "events": {
+    "count": 26,
+    "statuses": {
+      "published": 9,
+      "pending_review": 15,
+      "rejected": 2
+    },
+    "populated": {
+      "description": 26,
+      "event_type": 0,
+      "format": 0,
+      "starts_at": 26,
+      "ends_at": 21,
+      "city": 15,
+      "cost_text": 13,
+      "is_free": 0,
+      "offering_id": 0,
+      "last_verified_at": 9
+    }
+  },
+  "offerKinds": {
+    "program": 54
+  },
+  "deliveryModes": {
+    "None": 54
+  },
+  "eventFormats": {
+    "None": 26
+  },
+  "regions": {
+    "Northern Michigan": 1,
+    "West Michigan": 5,
+    "Southeast": 8,
+    "Upper Peninsula": 1,
+    "Statewide": 5,
+    "Detroit Metro": 33,
+    "South Central": 2,
+    "Southwest": 3,
+    "East Central": 1,
+    "East Michigan": 2
+  },
+  "lanes": {
+    "corporate-careers": {
+      "organizations": 26,
+      "offerings": 22
+    },
+    "entrepreneurship": {
+      "organizations": 35,
+      "offerings": 32
+    },
+    "startup-ecosystem": {
+      "organizations": 29,
+      "offerings": 26
+    },
+    "learning-development": {
+      "organizations": 37,
+      "offerings": 35
+    }
+  },
+  "enabledSources": 47,
+  "disabledSourceOrganizations": [
+    "Automation Alley",
+    "Built In Detroit",
+    "Endeavor Detroit / Midwest",
+    "Michigan Central",
+    "Michigan Economic Development Corporation",
+    "Michigan Workforce Development Board",
+    "NextEnergy",
+    "Oakland County Michigan Works!",
+    "Office of Future Mobility & Electrification (OFME)",
+    "ProsperUs Detroit",
+    "SCORE Ann Arbor Area",
+    "SCORE Southeast Michigan",
+    "TechTown Detroit",
+    "Techstars Detroit Mobility",
+    "University of Michigan",
+    "University of Michigan - Dearborn",
+    "WMed Innovation Center",
+    "Wellfound"
+  ],
+  "providersWithOfferings": 40,
+  "providersWithEvents": 6,
+  "providersWithoutChildren": [
+    "Automation Alley",
+    "Built In Detroit",
+    "Endeavor Detroit / Midwest",
+    "Michigan Central",
+    "Michigan Economic Development Corporation",
+    "Michigan Workforce Development Board",
+    "NextEnergy",
+    "Oakland County Michigan Works!",
+    "Office of Future Mobility & Electrification (OFME)",
+    "ProsperUs Detroit",
+    "SCORE Ann Arbor Area",
+    "SCORE Southeast Michigan",
+    "TechTown Detroit",
+    "Techstars Detroit Mobility",
+    "University of Michigan",
+    "University of Michigan - Dearborn",
+    "WMed Innovation Center",
+    "Wellfound"
+  ],
+  "workbookTaxonomyTypes": {
+    "topic": 39,
+    "role": 19,
+    "career_stage": 6,
+    "eligibility": 8,
+    "format": 7
+  },
+  "workbookTopicTiers": {
+    "1.0": 9,
+    "2.0": 14,
+    "3.0": 7,
+    "4.0": 9
+  },
+  "workbookEntitiesServes": {
+    "Early-stage entrepreneurship": 55,
+    "Growth-stage entrepreneurship": 33,
+    "Executive / leadership advancement": 23,
+    "Durable skills development": 21,
+    "Mid-career pivot": 59,
+    "Technical upskilling": 78,
+    "Career re-entry": 44,
+    "Mentorship": 4,
+    "Pitch competition": 3,
+    "Networking": 8,
+    "Coworking": 2,
+    "Capital access": 5,
+    "Industry advocacy": 2,
+    "Professional development": 3,
+    "Established small business growth": 1
+  },
+  "workbookProgramsTypes": {
+    "program": 114,
+    "job_board": 13,
+    "resource": 2,
+    "service": 30,
+    "capital": 41,
+    "event": 12
+  },
+  "workbookEventAudiences": {
+    "founder": 73,
+    "workforce|smallbiz": 4,
+    "smallbiz": 43,
+    "founder|workforce": 15,
+    "workforce": 28,
+    "founder|smallbiz|nonprofit": 2,
+    "founder|nonprofit": 1,
+    "founder|smallbiz": 12,
+    "smallbiz|founder": 12,
+    "nonprofit|workforce": 2,
+    "smallbiz|workforce": 2,
+    "workforce|nonprofit": 2,
+    "workforce|founder": 2,
+    "smallbiz|nonprofit": 7,
+    "nonprofit|smallbiz": 1,
+    "nonprofit|founder": 1,
+    "nonprofit": 4
+  },
+  "qualitySignals": {
+    "offerings": {
+      "shortNames": [
+        {
+          "id": "01a1d168-422a-7748-b23c-0238c8c5ab20",
+          "provider": "Grand Rapids Community College",
+          "name": "Automotive Technician"
+        },
+        {
+          "id": "01a1d168-39ac-70bb-8eee-3ac18cc44d22",
+          "provider": "Ann Arbor SPARK",
+          "name": "SPARK Lead"
+        },
+        {
+          "id": "01a1d5f4-f030-7066-89b7-e5862cdbc2cd",
+          "provider": "Washtenaw Community College",
+          "name": "5-Month Bootcamp"
+        },
+        {
+          "id": "01a1d5f4-f03c-70a6-911f-2b84e933b824",
+          "provider": "Washtenaw Community College",
+          "name": "Exploration"
+        },
+        {
+          "id": "01a1d5f5-6630-7600-bb07-0eee5ad8b370",
+          "provider": "Innovate Marquette SmartZone",
+          "name": "IMQT Protolab"
+        },
+        {
+          "id": "01a1d5f5-6624-7271-9b53-b8ac7ed03816",
+          "provider": "Innovate Marquette SmartZone",
+          "name": "Innovation Journey"
+        },
+        {
+          "id": "01a1d5f5-663c-754d-bc6a-43a5b12350f6",
+          "provider": "Innovate Marquette SmartZone",
+          "name": "Invent@NMU"
+        },
+        {
+          "id": "01a1d5f5-710d-70b8-939c-4371883dff25",
+          "provider": "Michigan Small Business Development Center",
+          "name": "Tech Services"
+        },
+        {
+          "id": "01a1ea43-fd0d-7762-beda-4f99bbeb1ded",
+          "provider": "Western Michigan University",
+          "name": "Custom Programs"
+        },
+        {
+          "id": "01a1ea43-d8fa-710b-87bf-272ab5644907",
+          "provider": "MI Community College Association (MCCA)",
+          "name": "Leadership Development"
+        },
+        {
+          "id": "01a1ea43-ea10-70e2-9ad1-00f77ad8463c",
+          "provider": "Oakland University",
+          "name": "OU INC"
+        },
+        {
+          "id": "01a1ea43-c952-72a4-a160-37d7ce4dfcc5",
+          "provider": "Detroit Means Business",
+          "name": "313 STRONG"
+        },
+        {
+          "id": "01a1ea60-29b0-7375-abe9-1cc639719394",
+          "provider": "Detroit Regional Chamber",
+          "name": "Leadership Detroit"
+        },
+        {
+          "id": "01a1ea60-24b7-7214-b024-7c6b4761bc71",
+          "provider": "Detroit Employment Solutions Corp (DESC)",
+          "name": "Customized Training"
+        },
+        {
+          "id": "01a1ea60-2248-770f-b394-9e0c780a02df",
+          "provider": "Cleary University",
+          "name": "Career Development"
+        },
+        {
+          "id": "01a1ea60-a9b7-7315-9bf0-6602ab94afec",
+          "provider": "Motor City Match",
+          "name": "Cash Track"
+        },
+        {
+          "id": "01a1ea60-a9af-71dc-89dc-8d819c935534",
+          "provider": "Motor City Match",
+          "name": "Plan Track"
+        },
+        {
+          "id": "01a1ea60-1964-70e5-b275-cb538095b136",
+          "provider": "Build Institute",
+          "name": "BUILD Basics"
+        },
+        {
+          "id": "01a1ea60-5ac3-76a4-808e-927726a5a09b",
+          "provider": "Michigan Technology Services",
+          "name": "Network+ Training"
+        },
+        {
+          "id": "01a1ea7e-cd71-7503-bc62-e2f8d746aaa0",
+          "provider": "Macomb/St. Clair Michigan Works!",
+          "name": "Classroom Training"
+        },
+        {
+          "id": "01a1ea7e-d23c-7161-999f-87548dd55f0f",
+          "provider": "Michigan Works! Southeast",
+          "name": "Workforce Education"
+        },
+        {
+          "id": "01a1ea7f-061e-73df-9194-aa779c8d4fa6",
+          "provider": "Velocity Center",
+          "name": "ACCELERATOR"
+        },
+        {
+          "id": "01a1ea7f-0625-708e-8f46-7da3bd70a2d8",
+          "provider": "Velocity Center",
+          "name": "INCUBATOR PROGRAMS"
+        }
+      ],
+      "namesWithNavigation": [],
+      "contactInDescription": 3
+    },
+    "events": {
+      "shortNames": [
+        {
+          "id": "01a1d168-5539-7434-a2e5-890d17e43f0b",
+          "provider": "West Michigan Works!",
+          "name": "Entrepreneurship 101"
+        },
+        {
+          "id": "01a1d168-5549-77c6-8fcf-2067c382647a",
+          "provider": "West Michigan Works!",
+          "name": "Resume Lab"
+        },
+        {
+          "id": "01a1d168-5542-7193-beef-fadfe0d009f1",
+          "provider": "West Michigan Works!",
+          "name": "Resume Writing"
+        },
+        {
+          "id": "01a1d5f8-3939-76b9-9932-bc45e8d1bb73",
+          "provider": "Capital Area Michigan Works!",
+          "name": "Professionalism"
+        }
+      ],
+      "namesWithNavigation": [],
+      "contactInDescription": 2
+    }
+  },
+  "workbookUnknownProviderReferences": {
+    "Programs": 0,
+    "Events": 75,
+    "Courses": 43
+  },
+  "snapshotMethod": "Local PostgreSQL BEGIN READ ONLY; explicit public listing/classification tables only; no personal intake/account/referral tables",
+  "workbookSource": "context/mi-ecosystem-data.xlsx",
+  "workbookSha256": "10577b4af34c4c9564c2f53e0818f19b45aff287b9d92cbf8352158e814c6258",
+  "asOf": "2026-11-17T17:46:44.581Z",
+  "tagProposalCounts": {
+    "goal": 9,
+    "support": 8,
+    "topic": 10,
+    "industry": 8,
+    "audience": 5,
+    "business-stage": 4
+  },
+  "sourceAndDatabaseUnchanged": true
+}

@@ -1,0 +1,6 @@
+# Dependency lifecycle scripts required by the existing local tooling.
+allowBuilds:
+  esbuild: true
+  node: true
+  workerd: true
+  fsevents: false

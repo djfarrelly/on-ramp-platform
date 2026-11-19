@@ -1,0 +1,12 @@
+# Local Wrangler uses this as the Hyperdrive origin. Never use a production DB.
+CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_HYPERDRIVE=postgresql://onramp:onramp_local@127.0.0.1:55432/onramp
+
+# Ingestion RPC is disabled until these are explicitly configured.
+# INGEST_ADMIN_TOKEN=generate-a-random-token-with-at-least-32-characters
+# INGEST_REVIEWER_ID=an-active-staff-user-uuid
+# Optional inference settings: see docs/ingestion.md. Use Wrangler secrets remotely.
+# CLOUDFLARE_ACCOUNT_ID=
+# AI_GATEWAY_ID=
+# CLOUDFLARE_AI_TOKEN=
+# AI_GATEWAY_SPEND_LIMIT_CONFIGURED=true
+# DISCOVERY_MODEL=@cf/ibm-granite/granite-4.0-h-micro

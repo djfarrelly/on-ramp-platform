@@ -1,0 +1,1135 @@
+{
+  "key": "southeast-20-2026-11-17",
+  "workbook": "context/mi-ecosystem-data.xlsx",
+  "seed": "16f799a4f857aeb2afc593b6b721e546",
+  "profiles": [
+    {
+      "id": "019a7e04-0000-7000-8000-000000000064",
+      "locationId": "019a7e04-0000-7000-8000-0000000000c8",
+      "workbookRow": 10,
+      "workbookEntityId": "detroitcareers",
+      "slug": "city-of-detroit",
+      "name": "City of Detroit",
+      "site": "https://detroitmi.gov/",
+      "summary": "City of Detroit public careers and entrepreneurship resources, including its municipal careers portal and Detroit Startup Fund.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": [
+        "learning-development",
+        "corporate-careers",
+        "entrepreneurship",
+        "startup-ecosystem"
+      ],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-00000000012c",
+          "name": "City of Detroit Careers — public offerings (Southeast batch)",
+          "url": "https://detroitmi.gov/departments/human-resources-department/apply-job",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://detroitmi.gov/privacy. Its commercial-use restriction is retained; this bounded local import supports the neutral public-service directory, with attribution and source links, no resale, publication or job-list scraping. The listing is the City careers portal, not a job vacancy. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-detroitcareers-offerings",
+            "allowedHosts": ["detroitmi.gov"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://detroitmi.gov/departments/human-resources-department/apply-job"
+              ]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": "h1.page-title",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".field--name-description p:nth-of-type(-n+2)",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".field--name-description p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "019a7e04-0000-7000-8000-00000000013e",
+          "name": "Detroit Startup Fund — public offerings (Southeast batch)",
+          "url": "https://detroitmi.gov/government/mayors-office/mayors-initiatives-and-programs/detroit-startup-fund",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed City Startup Fund page and https://detroitmi.gov/privacy. Public-service directory import only, with source attribution, no commercial resale. Fund is an offering of the City of Detroit; use the existing batch City profile rather than inventing a separate organization. Do not infer a currently open application window. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-detroitstartupfund-offerings",
+            "allowedHosts": ["detroitmi.gov"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://detroitmi.gov/government/mayors-office/mayors-initiatives-and-programs/detroit-startup-fund"
+              ]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": "h1.page-title",
+                  "required": true
+                },
+                "description": {
+                  "selector": "#taxonomy-term-11541 .field--name-description p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "#taxonomy-term-11541 .field--name-description p:contains(\"Thriving Hub\")",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000065",
+      "locationId": "019a7e04-0000-7000-8000-0000000000c9",
+      "workbookRow": 82,
+      "workbookEntityId": "scoresemi",
+      "slug": "scoresemi",
+      "name": "SCORE Southeast Michigan",
+      "site": "https://www.score.org/mi/se-michigan/",
+      "summary": "Free business mentoring through volunteer mentors and workshops. It is the largest SCORE chapter in Michigan.",
+      "city": "Detroit metro",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-00000000012d",
+          "name": "SCORE Southeast Michigan — public offerings (Southeast batch)",
+          "url": "https://www.score.org/mi/se-michigan/",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Access hold: the canonical SCORE chapter URL https://www.score.org/mi/se-michigan/ returned HTTP 403 through the robots-aware fetcher. No alternate scraping or cached-search import.",
+          "config": {
+            "version": 1,
+            "key": "se20-scoresemi-offerings",
+            "allowedHosts": ["www.score.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.score.org/mi/se-michigan/"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000066",
+      "locationId": "019a7e04-0000-7000-8000-0000000000ca",
+      "workbookRow": 4,
+      "workbookEntityId": "automationalley",
+      "slug": "automationalley",
+      "name": "Automation Alley",
+      "site": "https://automationalley.com/",
+      "summary": "Industry 4.0 knowledge center, technology upskilling for manufacturers.",
+      "city": "Troy",
+      "region": "Detroit Metro",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-00000000012e",
+          "name": "Automation Alley — public offerings (Southeast batch)",
+          "url": "https://automationalley.com/",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Robots policy timing hold: the public fetcher reports a requested crawl delay above its supported 30-second manual-pass maximum. Respect this delay; do not bypass it through another fetch or model adapter. Configure a compliant slow fetch before enabling.",
+          "config": {
+            "version": 1,
+            "key": "se20-automationalley-offerings",
+            "allowedHosts": ["automationalley.com"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://automationalley.com/"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000067",
+      "locationId": "019a7e04-0000-7000-8000-0000000000cb",
+      "workbookRow": 26,
+      "workbookEntityId": "henryfordcollege",
+      "slug": "henryfordcollege",
+      "name": "Henry Ford College",
+      "site": "https://www.hfcc.edu/",
+      "summary": "Workforce development and corporate training programs serving the Dearborn industry corridor, including technical certifications, professional development, and employer-customized training.",
+      "city": "Dearborn",
+      "region": "Detroit Metro",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-00000000012f",
+          "name": "Henry Ford College — public offerings (Southeast batch)",
+          "url": "https://www.hfcc.edu/wfpd/classes-training",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed HFC public program page, https://www.hfcc.edu/copyright and https://policies.hfcc.edu/policy/computer-systems-acceptable. Copyright policy permits public-content sharing with attribution and a source link; preserve Henry Ford College attribution and the original URL. Import one public Apple support course, no images or instructional materials. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-henryfordcollege-offerings",
+            "allowedHosts": ["www.hfcc.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.hfcc.edu/wfpd/classes-training"]
+            },
+            "dom": {
+              "scope": "#apple-developer:has(h2:contains(\"Apple Certified Support Professional\"))",
+              "fields": {
+                "name": {
+                  "selector": "h2",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "p:first",
+                  "required": true
+                },
+                "costText": {
+                  "selector": "p:contains(\"Price:\")",
+                  "required": true
+                },
+                "durationText": {
+                  "selector": "p:contains(\"24 hours\")",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000068",
+      "locationId": "019a7e04-0000-7000-8000-0000000000cc",
+      "workbookRow": 16,
+      "workbookEntityId": "detroitregionalchamb",
+      "slug": "detroitregionalchamb",
+      "name": "Detroit Regional Chamber",
+      "site": "https://www.detroitchamber.com/",
+      "summary": "Detroit drives degrees, talent strategic plan, mackinac policy conference.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000130",
+          "name": "Detroit Regional Chamber — public offerings (Southeast batch)",
+          "url": "https://www.detroitchamber.com/leadership-detroit/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.detroitchamber.com/leadership-detroit/ and linked usage policies on 2026-11-17; no explicit automated-collection prohibition found on inspected pages. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-detroitregionalchamb-offerings",
+            "allowedHosts": ["www.detroitchamber.com"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.detroitchamber.com/leadership-detroit/"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".content-introduction__body p, .general-content__body p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".content-introduction__body p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "019a7e04-0000-7000-8000-000000000320",
+          "name": "Detroit Regional Chamber — Chamber-organized events (Southeast batch)",
+          "url": "https://www.detroitchamber.com/wp-json/tribe/events/v1/events?categories=32",
+          "target": "events",
+          "enabled": true,
+          "policyNote": "Reviewed advertised public Events Calendar REST feed and linked Chamber privacy policy on 2026-11-17. Filter categories=32 (Chamber), excluding member-submitted category 215. Verified returned category and organizers on source evidence. Import at most three upcoming Chamber events; no inferred eligibility, publication or member-login access.",
+          "config": {
+            "version": 1,
+            "key": "se20-detroitregionalchamb-events",
+            "allowedHosts": ["www.detroitchamber.com"],
+            "mode": "deterministic",
+            "limit": 3,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "tribe-json"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000069",
+      "locationId": "019a7e04-0000-7000-8000-0000000000cd",
+      "workbookRow": 28,
+      "workbookEntityId": "investdetroit",
+      "slug": "investdetroit",
+      "name": "Invest Detroit",
+      "site": "https://investdetroit.com/",
+      "summary": "Community development financial institution, venture lending, gs 10ksb lending partner.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000131",
+          "name": "Invest Detroit — public offerings (Southeast batch)",
+          "url": "https://investdetroit.com/small-business/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://investdetroit.com/small-business/ and linked usage policies on 2026-11-17; no explicit automated-collection prohibition found on inspected pages. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-investdetroit-offerings",
+            "allowedHosts": ["investdetroit.com"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://investdetroit.com/small-business/"]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": ".band__hero h2",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".band__text_block_with_title:first p:nth-of-type(-n+2)",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".band__text_block_with_title:first p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-00000000006a",
+      "locationId": "019a7e04-0000-7000-8000-0000000000ce",
+      "workbookRow": 97,
+      "workbookEntityId": "wellfound",
+      "slug": "wellfound",
+      "name": "Wellfound",
+      "site": "https://wellfound.com/",
+      "summary": "Startup-focused job platform (formerly AngelList Talent) with a Detroit hub. Features equity and salary transparency, direct founder connections, and curated startup opportunities.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000132",
+          "name": "Wellfound — public offerings (Southeast batch)",
+          "url": "https://wellfound.com/location/detroit",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Publisher restriction: https://wellfound.com/terms prohibits harvesting/scraping and redistribution of content without express permission. Keep the website source disabled; no individual jobs or people imported.",
+          "config": {
+            "version": 1,
+            "key": "se20-wellfound-offerings",
+            "allowedHosts": ["wellfound.com"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://wellfound.com/location/detroit"]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-00000000006b",
+      "locationId": "019a7e04-0000-7000-8000-0000000000cf",
+      "workbookRow": 122,
+      "workbookEntityId": "techstarsdetroit",
+      "slug": "techstarsdetroit",
+      "name": "Techstars Detroit Mobility",
+      "site": "https://www.techstars.com/",
+      "summary": "Workbook-listed Techstars Detroit mobility accelerator. Its original program URL is unavailable; current program status remains unverified.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000133",
+          "name": "Techstars Detroit Mobility — public offerings (Southeast batch)",
+          "url": "https://www.techstars.com/accelerators/detroit-mobility",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Availability hold: the workbook Detroit Mobility accelerator URL returns HTTP 404. Historical Techstars Detroit announcements do not establish a current accepting cohort. Verify the program and current source before enabling.",
+          "config": {
+            "version": 1,
+            "key": "se20-techstarsdetroit-offerings",
+            "allowedHosts": ["www.techstars.com"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.techstars.com/accelerators/detroit-mobility"
+              ]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-00000000006c",
+      "locationId": "019a7e04-0000-7000-8000-0000000000d0",
+      "workbookRow": 15,
+      "workbookEntityId": "detroitemploymentsol",
+      "slug": "detroitemploymentsol",
+      "name": "Detroit Employment Solutions Corp (DESC)",
+      "site": "https://descmiworks.org/",
+      "summary": "City of detroit, large employer network, career transitions.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000134",
+          "name": "Detroit Employment Solutions Corp (DESC) — public offerings (Southeast batch)",
+          "url": "https://descmiworks.org/business-services/customized-training/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed public customized training page and https://descmiworks.org/terms-and-conditions/ (communications/SMS terms). No automated collection prohibition found on inspected pages. Employer training is not represented as open enrollment for individual job seekers. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-detroitemploymentsol-offerings",
+            "allowedHosts": ["descmiworks.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://descmiworks.org/business-services/customized-training/"
+              ]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".introduction-content p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".introduction-content p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-00000000006d",
+      "locationId": "019a7e04-0000-7000-8000-0000000000d1",
+      "workbookRow": 68,
+      "workbookEntityId": "nextenergy",
+      "slug": "nextenergy",
+      "name": "NextEnergy",
+      "site": "https://nextenergy.org/",
+      "summary": "Nonprofit energy innovation center, medc/ofme partner, mobility tech, est. 2002.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000135",
+          "name": "NextEnergy — public offerings (Southeast batch)",
+          "url": "https://nextenergy.org/services/",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Robots verification hold: the robots-aware fetcher could not verify robots.txt for nextenergy.org. Do not fetch detail pages or substitute a rendering/model adapter until policy access is restored.",
+          "config": {
+            "version": 1,
+            "key": "se20-nextenergy-offerings",
+            "allowedHosts": ["nextenergy.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://nextenergy.org/services/"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-00000000006e",
+      "locationId": "019a7e04-0000-7000-8000-0000000000d2",
+      "workbookRow": 11,
+      "workbookEntityId": "clearyuniversity",
+      "slug": "clearyuniversity",
+      "name": "Cleary University",
+      "site": "https://www.cleary.edu/",
+      "summary": "Business-focused institution, entrepreneurship niche.",
+      "city": "Howell",
+      "region": "Southeast",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000136",
+          "name": "Cleary University — public offerings (Southeast batch)",
+          "url": "https://www.cleary.edu/admissions/career-development/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.cleary.edu/admissions/career-development/ and linked usage policies on 2026-11-17; no explicit automated-collection prohibition found on inspected pages. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-clearyuniversity-offerings",
+            "allowedHosts": ["www.cleary.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.cleary.edu/admissions/career-development/"]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": ".elementor-element-4d2754a h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".elementor-element-47a5290 p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".elementor-element-47a5290 p:nth-of-type(2)",
+                  "required": true
+                },
+                "eligibilitySummary": {
+                  "selector": ".elementor-element-47a5290 p:nth-of-type(2)",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-00000000006f",
+      "locationId": "019a7e04-0000-7000-8000-0000000000d3",
+      "workbookRow": 18,
+      "workbookEntityId": "easternmichiganunive",
+      "slug": "easternmichiganunive",
+      "name": "Eastern Michigan University",
+      "site": "https://www.emich.edu/",
+      "summary": "Est. 1986, pitch competitions, certificate programs.",
+      "city": "Ypsilanti",
+      "region": "Southeast",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000137",
+          "name": "Eastern Michigan University — public offerings (Southeast batch)",
+          "url": "https://careertraining.emich.edu/training-programs/entrepreneurship-start-up-business-owner-management-voucher-included/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "The workbook CFE page failed robots verification; no CFE content was collected. This is a separately published, robots-accessible EMU-branded ed2go course catalog page linked in public search, not a proxy or rendering of the inaccessible CFE page. Preserve provider attribution and the course source link. No model calls. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-easternmichiganunive-offerings",
+            "allowedHosts": ["careertraining.emich.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://careertraining.emich.edu/training-programs/entrepreneurship-start-up-business-owner-management-voucher-included/"
+              ]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "#tab_overview p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000070",
+      "locationId": "019a7e04-0000-7000-8000-0000000000d4",
+      "workbookRow": 67,
+      "workbookEntityId": "neweconomyinitiative",
+      "slug": "neweconomyinitiative",
+      "name": "New Economy Initiative",
+      "site": "https://neweconomyinitiative.org/",
+      "summary": "Community foundation for se michigan, grants for under-represented entrepreneurs, mi small business helper.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000138",
+          "name": "New Economy Initiative — public offerings (Southeast batch)",
+          "url": "https://neweconomyinitiative.org/resources/mi-small-business-helper/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://neweconomyinitiative.org/resources/mi-small-business-helper/ and linked usage policies on 2026-11-17; no explicit automated-collection prohibition found on inspected pages. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-neweconomyinitiative-offerings",
+            "allowedHosts": ["neweconomyinitiative.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://neweconomyinitiative.org/resources/mi-small-business-helper/"
+              ]
+            },
+            "dom": {
+              "scope": "#main",
+              "fields": {
+                "name": {
+                  "selector": "h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".wysiwyg-wrap p, .wysiwyg-wrap li",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".wysiwyg-wrap p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000071",
+      "locationId": "019a7e04-0000-7000-8000-0000000000d5",
+      "workbookRow": 64,
+      "workbookEntityId": "motorcitymatch",
+      "slug": "motorcitymatch",
+      "name": "Motor City Match",
+      "site": "https://www.motorcitymatch.com/",
+      "summary": "City of detroit program, grants up to $100k, 5 tracks (plan, develop, design, cash, restore).",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000139",
+          "name": "Motor City Match — public offerings (Southeast batch)",
+          "url": "https://www.motorcitymatch.com/plan-track/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.motorcitymatch.com/plan-track/ and https://www.motorcitymatch.com/cash-track/ and linked usage policies on 2026-11-17; no explicit automated-collection prohibition found on inspected pages. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-motorcitymatch-offerings",
+            "allowedHosts": ["www.motorcitymatch.com"],
+            "mode": "deterministic",
+            "limit": 2,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.motorcitymatch.com/plan-track/",
+                "https://www.motorcitymatch.com/cash-track/"
+              ]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".main-content .wpb_text_column p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".main-content .wpb_text_column p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000072",
+      "locationId": "019a7e04-0000-7000-8000-0000000000d6",
+      "workbookRow": 105,
+      "workbookEntityId": "a2ychamber",
+      "slug": "a2ychamber",
+      "name": "Ann Arbor/Ypsilanti Regional Chamber",
+      "site": "https://www.a2ychamber.org/",
+      "summary": "The Ann Arbor/Ypsilanti Regional Chamber represents the southeast Michigan business community with networking, advocacy, and professional development. Active supporter of Going PRO and regional talent initiatives.",
+      "city": "Ann Arbor",
+      "region": "Southeast",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-00000000013a",
+          "name": "Ann Arbor/Ypsilanti Regional Chamber — public offerings (Southeast batch)",
+          "url": "https://www.a2ychamber.org/a2y-leadership/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed A2Y Leadership page and linked https://www.a2ychamber.org/privacy-policy/. Page includes a Class of 2024 heading; import an ongoing program description only, without asserting a current cohort or accepting applications. Preserve fees/commitment context for editorial review. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-a2ychamber-offerings",
+            "allowedHosts": ["www.a2ychamber.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.a2ychamber.org/a2y-leadership/"]
+            },
+            "dom": {
+              "scope": "html",
+              "fields": {
+                "name": {
+                  "selector": "title",
+                  "required": true
+                },
+                "description": {
+                  "selector": "main .elementor-element-da1967e p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "main .elementor-element-da1967e p:nth-of-type(2)",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000073",
+      "locationId": "019a7e04-0000-7000-8000-0000000000d7",
+      "workbookRow": 41,
+      "workbookEntityId": "macombcommunitycolle",
+      "slug": "macombcommunitycolle",
+      "name": "Macomb Community College",
+      "site": "https://www.macomb.edu/",
+      "summary": "Maker space, mi-sbdc satellite, workforce training.",
+      "city": "Warren",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-00000000013b",
+          "name": "Macomb Community College — public offerings (Southeast batch)",
+          "url": "https://www.macomb.edu/programs-courses/programs/basic-computer-skills.html",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.macomb.edu/programs-courses/programs/basic-computer-skills.html and https://www.macomb.edu/programs-courses/programs/workplace-computing-skills.html and linked usage policies on 2026-11-17; no explicit automated-collection prohibition found on inspected pages. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-macombcommunitycolle-offerings",
+            "allowedHosts": ["www.macomb.edu"],
+            "mode": "deterministic",
+            "limit": 2,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.macomb.edu/programs-courses/programs/basic-computer-skills.html",
+                "https://www.macomb.edu/programs-courses/programs/workplace-computing-skills.html"
+              ]
+            },
+            "dom": {
+              "scope": "html",
+              "fields": {
+                "name": {
+                  "selector": "h1.title",
+                  "required": true
+                },
+                "description": {
+                  "selector": "main .wysiwyg p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "main .wysiwyg p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000074",
+      "locationId": "019a7e04-0000-7000-8000-0000000000d8",
+      "workbookRow": 6,
+      "workbookEntityId": "buildinstitute",
+      "slug": "buildinstitute",
+      "name": "Build Institute",
+      "site": "https://www.buildinstitute.org/",
+      "summary": "Equity-focused small business accelerator, paused ops end 2025 for retooling, est. 2012.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-00000000013c",
+          "name": "Build Institute — public offerings (Southeast batch)",
+          "url": "https://www.buildinstitute.org/learn/build-basics/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed current public BUILD Basics program page and home page. Workbook notes a prior operational pause; current page describes the eight-week program but does not establish a current accepting cohort. Preserve that uncertainty; no application-status claim or date invented. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-buildinstitute-offerings",
+            "allowedHosts": ["www.buildinstitute.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.buildinstitute.org/learn/build-basics/"]
+            },
+            "dom": {
+              "scope": "main#content",
+              "fields": {
+                "name": {
+                  "selector": "h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".elementor-element-6ba028e p, .elementor-element-dc6641a p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".elementor-element-6ba028e p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000075",
+      "locationId": "019a7e04-0000-7000-8000-0000000000d9",
+      "workbookRow": 7,
+      "workbookEntityId": "builtindet",
+      "slug": "builtindet",
+      "name": "Built In Detroit",
+      "site": "https://builtin.com/",
+      "summary": "National tech jobs platform with a dedicated Michigan hub covering Detroit and Ann Arbor. Startup profiles, salary benchmarks, company rankings, and curated job listings.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-00000000013d",
+          "name": "Built In Detroit — public offerings (Southeast batch)",
+          "url": "https://builtin.com/jobs/detroit",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Publisher restriction: https://builtin.com/legal/community-terms-of-use section 3 prohibits bots, spiders, scrapers and other automated access. Keep disabled pending publisher permission; no job listings imported.",
+          "config": {
+            "version": 1,
+            "key": "se20-builtindet-offerings",
+            "allowedHosts": ["builtin.com"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://builtin.com/jobs/detroit"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000077",
+      "locationId": "019a7e04-0000-7000-8000-0000000000db",
+      "workbookRow": 43,
+      "workbookEntityId": "metrodetroitblackbus",
+      "slug": "metrodetroitblackbus",
+      "name": "Michigan Black Business Alliance",
+      "site": "https://www.blackbizalliance.com/",
+      "summary": "Michigan Black Business Alliance, formerly Metro Detroit Black Business Alliance, supports Black-owned businesses through business development, capital access and advocacy.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-00000000013f",
+          "name": "Metro Detroit Black Business Alliance — public offerings (Southeast batch)",
+          "url": "https://www.blackbizalliance.com/capital-connect",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Verified renamed Michigan Black Business Alliance and current Capital Connect page. Read linked membership terms PDF https://www.blackbizalliance.com/_files/ugd/b4d2b5_9a382f2662614bf596d7067876ab496d.pdf; no collection prohibition in that document. Preserve historical workbook identity, current provider name, and cohort-specific requirements; no paid membership access. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-metrodetroitblackbus-offerings",
+            "allowedHosts": ["www.blackbizalliance.com"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.blackbizalliance.com/capital-connect"]
+            },
+            "dom": {
+              "scope": "html",
+              "fields": {
+                "name": {
+                  "selector": "title",
+                  "required": true
+                },
+                "description": {
+                  "selector": "#comp-lso0llmx p, #comp-lso0oj3f p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "#comp-lso0llmx p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e04-0000-7000-8000-000000000078",
+      "locationId": "019a7e04-0000-7000-8000-0000000000dc",
+      "workbookRow": 52,
+      "workbookEntityId": "michigantechnologyse",
+      "slug": "michigantechnologyse",
+      "name": "Michigan Technology Services",
+      "site": "https://michigancomputertraining.com/",
+      "summary": "Microsoft, cisco, scrum certifications, designed for experienced it professionals.",
+      "city": "Farmington Hills",
+      "region": "Detroit Metro",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e04-0000-7000-8000-000000000140",
+          "name": "Michigan Technology Services — public offerings (Southeast batch)",
+          "url": "https://michigancomputertraining.com/events/ai-prompt-engineering",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed two public training pages and https://michigancomputertraining.com/terms-of-use/. No automated-collection prohibition found in inspected terms. Import ongoing offerings only: AI page says public dates will be announced; no event date or accepting cohort invented. Use robots-aware bounded fetching, no model calls and pending review only. This note is not a claim of publisher endorsement.",
+          "config": {
+            "version": 1,
+            "key": "se20-michigantechnologyse-offerings",
+            "allowedHosts": ["michigancomputertraining.com"],
+            "mode": "deterministic",
+            "limit": 2,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://michigancomputertraining.com/events/ai-prompt-engineering",
+                "https://michigancomputertraining.com/program-category/network-training/"
+              ]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": ".intro-content h2:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "article.article > p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "article.article > p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

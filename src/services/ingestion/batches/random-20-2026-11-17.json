@@ -1,0 +1,1111 @@
+{
+  "key": "random-20-2026-11-17",
+  "workbook": "context/mi-ecosystem-data.xlsx",
+  "seed": "5a49ccc0c78bb12e782b1b1fb0a65f96",
+  "profiles": [
+    {
+      "id": "019a7e02-0000-7000-8000-000000000064",
+      "locationId": "019a7e02-0000-7000-8000-0000000000c8",
+      "workbookRow": 55,
+      "workbookEntityId": "michiganworkforcedev",
+      "slug": "michiganworkforcedev",
+      "name": "Michigan Workforce Development Board",
+      "site": "https://www.michigan.gov/leo/boards-comms-councils/mwdb",
+      "summary": "Executive order 2020-107, sets statewide workforce priorities.",
+      "city": "Lansing",
+      "region": "Statewide",
+      "lanes": ["corporate-careers", "learning-development"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-00000000012c",
+          "name": "Michigan Workforce Development Board — public offerings (random batch)",
+          "url": "https://www.michigan.gov/leo/boards-comms-councils/mwdb",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Publisher permission required: https://www.michigan.gov/policies explicitly prohibits access through automated scripts, crawlers or scrapers without a separate written agreement. Do not enable or replay collected pages without permission.",
+          "config": {
+            "version": 1,
+            "key": "random20-michiganworkforcedev-offerings",
+            "allowedHosts": ["www.michigan.gov"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["corporate-careers", "learning-development"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.michigan.gov/leo/boards-comms-councils/mwdb"
+              ]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".component-content .container .row > .col-12 > p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000065",
+      "locationId": "019a7e02-0000-7000-8000-0000000000c9",
+      "workbookRow": 75,
+      "workbookEntityId": "prosperus",
+      "slug": "prosperus",
+      "name": "ProsperUs Detroit",
+      "site": "https://prosperusdetroit.org/",
+      "summary": "Community Development Financial Institution (CDFI) offering cohort-based entrepreneurial training and microlending to underserved entrepreneurs in Detroit, Hamtramck, Highland Park, and Inkster — serving over 1,500 graduates and borrowers to date.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-00000000012d",
+          "name": "ProsperUs Detroit — public offerings (random batch)",
+          "url": "https://prosperusdetroit.org/training/",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Publisher permission required: https://prosperusdetroit.org/terms-conditions/ USE OF THE SERVICE (h) prohibits automated scripts and (i) restricts deep links. No website import or replay until permission.",
+          "config": {
+            "version": 1,
+            "key": "random20-prosperus-offerings",
+            "allowedHosts": ["prosperusdetroit.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://prosperusdetroit.org/training/"]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": "h2.elementor-heading-title:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".elementor-element-b1240f0 p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000066",
+      "locationId": "019a7e02-0000-7000-8000-0000000000ca",
+      "workbookRow": 94,
+      "workbookEntityId": "wmedinnovationcenter",
+      "slug": "wmedinnovationcenter",
+      "name": "WMed Innovation Center",
+      "site": "https://www.med.wmich.edu/innovationcenter",
+      "summary": "Health sciences SmartZone, WMU medical school partnership.",
+      "city": "Kalamazoo",
+      "region": "Southwest",
+      "lanes": ["startup-ecosystem", "entrepreneurship"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-00000000012e",
+          "name": "WMed Innovation Center — public offerings (random batch)",
+          "url": "https://www.med.wmich.edu/node/383",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Source unavailable: robots-aware fetch to https://www.med.wmich.edu/node/383 failed. Do not disable TLS validation or bypass source controls; retry after connectivity and terms can be verified.",
+          "config": {
+            "version": 1,
+            "key": "random20-wmedinnovationcenter-offerings",
+            "allowedHosts": ["www.med.wmich.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["startup-ecosystem", "entrepreneurship"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.med.wmich.edu/node/383"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000067",
+      "locationId": "019a7e02-0000-7000-8000-0000000000cb",
+      "workbookRow": 85,
+      "workbookEntityId": "saginawvalleystateun",
+      "slug": "saginawvalleystateun",
+      "name": "Saginaw Valley State University",
+      "site": "https://www.svsu.edu/brdc/",
+      "summary": "Mi-sbdc lake huron region, stevens center for family business, mmtc-ne.",
+      "city": "University Center",
+      "region": "East Central",
+      "lanes": ["entrepreneurship", "learning-development"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-00000000012f",
+          "name": "Saginaw Valley State University — public offerings (random batch)",
+          "url": "https://www.svsu.edu/brdc/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.svsu.edu/brdc/ on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-saginawvalleystateun-offerings",
+            "allowedHosts": ["www.svsu.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "learning-development"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.svsu.edu/brdc/"]
+            },
+            "dom": {
+              "scope": "#main",
+              "fields": {
+                "name": {
+                  "selector": "h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".intro > p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".intro > p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000068",
+      "locationId": "019a7e02-0000-7000-8000-0000000000cc",
+      "workbookRow": 66,
+      "workbookEntityId": "muskegoninnovationhu",
+      "slug": "muskegoninnovationhu",
+      "name": "Muskegon Innovation Hub (GVSU)",
+      "site": "https://www.gvsu.edu/mihub/",
+      "summary": "GVSU-operated SmartZone, coworking, lakeshore tech ecosystem.",
+      "city": "Muskegon",
+      "region": "West Michigan",
+      "lanes": ["startup-ecosystem", "entrepreneurship"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-000000000130",
+          "name": "Muskegon Innovation Hub (GVSU) — public offerings (random batch)",
+          "url": "https://www.gvsu.edu/mihub/business-incubator-15",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.gvsu.edu/mihub/business-incubator-15 on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-muskegoninnovationhu-offerings",
+            "allowedHosts": ["www.gvsu.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["startup-ecosystem", "entrepreneurship"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.gvsu.edu/mihub/business-incubator-15"]
+            },
+            "dom": {
+              "scope": "html",
+              "fields": {
+                "name": {
+                  "selector": "title",
+                  "required": true
+                },
+                "description": {
+                  "selector": "main .node-chunk-paragraph:first p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "main .node-chunk-paragraph:first p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000069",
+      "locationId": "019a7e02-0000-7000-8000-0000000000cd",
+      "workbookRow": 114,
+      "workbookEntityId": "ofme",
+      "slug": "ofme",
+      "name": "Office of Future Mobility & Electrification (OFME)",
+      "site": "https://www.michigan.gov/leo/bureaus-agencies/ofme",
+      "summary": "State agency within MEDC building on Michigan's mobility legacy. Operates the Michigan Mobility Funding Platform, prototyping grants, and workforce programs across autonomous vehicles, electrification, drones, and advanced air mobility. Partners with MDOT, LEO, and private industry.",
+      "city": "Lansing",
+      "region": "Statewide",
+      "lanes": [
+        "startup-ecosystem",
+        "entrepreneurship",
+        "learning-development"
+      ],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-000000000131",
+          "name": "Office of Future Mobility & Electrification (OFME) — public offerings (random batch)",
+          "url": "https://www.michigan.gov/leo/bureaus-agencies/ofme/projects-and-programs/funding-and-testing/technology-deployments",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Publisher permission required: https://www.michigan.gov/policies explicitly prohibits automated collection without a separate written agreement. Current OFME pages are on Michigan.gov, not the outdated workbook MEDC URL.",
+          "config": {
+            "version": 1,
+            "key": "random20-ofme-offerings",
+            "allowedHosts": ["www.michigan.gov"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": [
+              "startup-ecosystem",
+              "entrepreneurship",
+              "learning-development"
+            ],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.michigan.gov/leo/bureaus-agencies/ofme/projects-and-programs/funding-and-testing/technology-deployments"
+              ]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".field-content > p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-00000000006a",
+      "locationId": "019a7e02-0000-7000-8000-0000000000ce",
+      "workbookRow": 13,
+      "workbookEntityId": "davenportuniversity",
+      "slug": "davenportuniversity",
+      "name": "Davenport University",
+      "site": "https://www.davenport.edu/",
+      "summary": "Career-focused professional certificates and degree programs aligned with employer needs across Michigan, with campuses in Grand Rapids, Detroit, Lansing, and online.",
+      "city": "Grand Rapids",
+      "region": "West Michigan",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-000000000132",
+          "name": "Davenport University — public offerings (random batch)",
+          "url": "https://www.davenport.edu/ipex/ipex-enroll-anytime-online",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.davenport.edu/ipex/ipex-enroll-anytime-online on 2026-11-17 and https://www.davenport.edu/terms-of-use. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-davenportuniversity-offerings",
+            "allowedHosts": ["www.davenport.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.davenport.edu/ipex/ipex-enroll-anytime-online"
+              ]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": "h1.page-title",
+                  "required": true
+                },
+                "description": {
+                  "selector": "main .ipx-hero p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "main .ipx-hero p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-00000000006b",
+      "locationId": "019a7e02-0000-7000-8000-0000000000cf",
+      "workbookRow": 33,
+      "workbookEntityId": "lansingcommunitycoll",
+      "slug": "lansingcommunitycoll",
+      "name": "Lansing Community College",
+      "site": "https://www.lcc.edu/community/workforce/",
+      "summary": "Entrepreneurship certificate, capital city workforce connections.",
+      "city": "Lansing",
+      "region": "South Central",
+      "lanes": [
+        "learning-development",
+        "corporate-careers",
+        "entrepreneurship"
+      ],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-000000000133",
+          "name": "Lansing Community College — public offerings (random batch)",
+          "url": "https://www.lcc.edu/community/workforce/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.lcc.edu/community/workforce/ on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-lansingcommunitycoll-offerings",
+            "allowedHosts": ["www.lcc.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": [
+              "learning-development",
+              "corporate-careers",
+              "entrepreneurship"
+            ],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.lcc.edu/community/workforce/"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".col-66 > p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".col-66 > p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-00000000006c",
+      "locationId": "019a7e02-0000-7000-8000-0000000000d0",
+      "workbookRow": 84,
+      "workbookEntityId": "semcamichiganworks",
+      "slug": "semcamichiganworks",
+      "name": "SEMCA Michigan Works!",
+      "site": "https://semcamiworks.org/",
+      "summary": "Monroe, wayne (excluding detroit), workforce training.",
+      "city": "Taylor",
+      "region": "Detroit Metro",
+      "lanes": ["corporate-careers", "learning-development"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-000000000134",
+          "name": "SEMCA Michigan Works! — public offerings (random batch)",
+          "url": "https://semcamiworks.org/job-seekers/training/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://semcamiworks.org/job-seekers/training/ on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-semcamichiganworks-offerings",
+            "allowedHosts": ["semcamiworks.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["corporate-careers", "learning-development"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://semcamiworks.org/job-seekers/training/"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": ".elementor-element-e5ddb05 h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".elementor-element-5768ac9, .elementor-element-5768ac9 + div",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".elementor-element-5768ac9 p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-00000000006d",
+      "locationId": "019a7e02-0000-7000-8000-0000000000d1",
+      "workbookRow": 19,
+      "workbookEntityId": "endeavordetroitmidwe",
+      "slug": "endeavordetroitmidwe",
+      "name": "Endeavor Detroit / Midwest",
+      "site": "https://us.endeavor.org/office/midwest/",
+      "summary": "Global network, selects + mentors high-growth founders, mi, il, wi, mn, est. 2015 in detroit.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["startup-ecosystem", "entrepreneurship"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-000000000135",
+          "name": "Endeavor Detroit / Midwest — public offerings (random batch)",
+          "url": "https://us.endeavor.org/office/midwest/",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Publisher permission/reuse review required: https://us.endeavor.org/terms-conditions/ prohibits incorporating pieces of the site into another product and restricts copying and derivatives. Source remains disabled.",
+          "config": {
+            "version": 1,
+            "key": "random20-endeavordetroitmidwe-offerings",
+            "allowedHosts": ["us.endeavor.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["startup-ecosystem", "entrepreneurship"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://us.endeavor.org/office/midwest/"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": ".topper__title",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".module-intro p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-00000000006e",
+      "locationId": "019a7e02-0000-7000-8000-0000000000d2",
+      "workbookRow": 30,
+      "workbookEntityId": "ketteringuniversity",
+      "slug": "ketteringuniversity",
+      "name": "Kettering University",
+      "site": "https://www.kettering.edu/",
+      "summary": "Sbdc on campus, co-op model, career transition support.",
+      "city": "Flint",
+      "region": "East Michigan",
+      "lanes": ["learning-development", "entrepreneurship"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-000000000136",
+          "name": "Kettering University — public offerings (random batch)",
+          "url": "https://www.kettering.edu/academics-research/programs/innovation-and-entrepreneurship-minor",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.kettering.edu/academics-research/programs/innovation-and-entrepreneurship-minor on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-ketteringuniversity-offerings",
+            "allowedHosts": ["www.kettering.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "entrepreneurship"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.kettering.edu/academics-research/programs/innovation-and-entrepreneurship-minor"
+              ]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".field--name-field-description p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".field--name-field-description p:nth-of-type(2)",
+                  "required": true
+                },
+                "eligibilitySummary": {
+                  "selector": ".field--name-field-description p:nth-of-type(4)",
+                  "required": true
+                },
+                "durationText": {
+                  "selector": ".field--name-field-description p:nth-of-type(3)",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-00000000006f",
+      "locationId": "019a7e02-0000-7000-8000-0000000000d3",
+      "workbookRow": 116,
+      "workbookEntityId": "michigancentral",
+      "slug": "michigancentral",
+      "name": "Michigan Central",
+      "site": "https://michigancentral.com/",
+      "summary": "Ford-affiliated nonprofit operating an open mobility innovation district at the historic Michigan Central Station. Hosts Newlab, Code313 youth programs, Art + Technology Fellowship, and partnerships across mobility, EV, and smart city research.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["startup-ecosystem", "learning-development"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-000000000137",
+          "name": "Michigan Central — public offerings (random batch)",
+          "url": "https://michigancentral.com/community/talent-development/",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Publisher permission/reuse review required: https://michigancentral.com/terms-conditions/ permits robots-compliant crawling but limits downloaded materials to personal noncommercial use and prohibits replicating site content. No prose import until republication is cleared.",
+          "config": {
+            "version": 1,
+            "key": "random20-michigancentral-offerings",
+            "allowedHosts": ["michigancentral.com"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["startup-ecosystem", "learning-development"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://michigancentral.com/community/talent-development/"
+              ]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000070",
+      "locationId": "019a7e02-0000-7000-8000-0000000000d4",
+      "workbookRow": 21,
+      "workbookEntityId": "gstmichiganworks",
+      "slug": "gstmichiganworks",
+      "name": "GST Michigan Works!",
+      "site": "https://gstmiworks.org/",
+      "summary": "Genesee, shiawassee, huron, lapeer, sanilac, tuscola.",
+      "city": "Flint",
+      "region": "East Michigan",
+      "lanes": ["corporate-careers", "learning-development"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-000000000138",
+          "name": "GST Michigan Works! — public offerings (random batch)",
+          "url": "https://gstmiworks.org/job-seekers/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://gstmiworks.org/job-seekers/ on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-gstmichiganworks-offerings",
+            "allowedHosts": ["gstmiworks.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["corporate-careers", "learning-development"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://gstmiworks.org/job-seekers/"]
+            },
+            "dom": {
+              "scope": "html",
+              "fields": {
+                "name": {
+                  "selector": "title",
+                  "required": true
+                },
+                "description": {
+                  "selector": "#panel-58-1-0-0",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "#panel-58-1-0-0 p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000071",
+      "locationId": "019a7e02-0000-7000-8000-0000000000d5",
+      "workbookRow": 99,
+      "workbookEntityId": "westernmichiganunive",
+      "slug": "westernmichiganunive",
+      "name": "Western Michigan University",
+      "site": "https://wmich.edu/professional",
+      "summary": "Ceus, scechs, corporate training partnerships, upskilling.",
+      "city": "Kalamazoo",
+      "region": "Southwest",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-000000000139",
+          "name": "Western Michigan University — public offerings (random batch)",
+          "url": "https://wmich.edu/professional/custom-programs",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://wmich.edu/professional/custom-programs on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-westernmichiganunive-offerings",
+            "allowedHosts": ["wmich.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://wmich.edu/professional/custom-programs"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".dxp-text:first p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".dxp-text:first p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000072",
+      "locationId": "019a7e02-0000-7000-8000-0000000000d6",
+      "workbookRow": 38,
+      "workbookEntityId": "micommunitycollegeas",
+      "slug": "micommunitycollegeas",
+      "name": "MI Community College Association (MCCA)",
+      "site": "https://www.mcca.org/",
+      "summary": "Leadership academy, professional associations leadership alliance.",
+      "city": "Lansing",
+      "region": "Statewide",
+      "lanes": ["learning-development"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-00000000013a",
+          "name": "MI Community College Association (MCCA) — public offerings (random batch)",
+          "url": "https://www.mcca.org/Leadership-Development",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.mcca.org/Leadership-Development on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-micommunitycollegeas-offerings",
+            "allowedHosts": ["www.mcca.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.mcca.org/Leadership-Development"]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "#collapse_11 .card-body p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "#collapse_11 .card-body p:first",
+                  "required": true
+                },
+                "eligibilitySummary": {
+                  "selector": "#collapse_11 .card-body p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000073",
+      "locationId": "019a7e02-0000-7000-8000-0000000000d7",
+      "workbookRow": 74,
+      "workbookEntityId": "oaklanduniversity",
+      "slug": "oaklanduniversity",
+      "name": "Oakland University",
+      "site": "https://www.oakland.edu/ouinc/",
+      "summary": "Rochester-based public university operating the OU INC SmartZone Accelerator, featuring a sports technology incubator and the I2B (Ideas to Business) program connecting students and entrepreneurs with commercialization support.",
+      "city": "Rochester",
+      "region": "Detroit Metro",
+      "lanes": [
+        "startup-ecosystem",
+        "entrepreneurship",
+        "learning-development"
+      ],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-00000000013b",
+          "name": "Oakland University — public offerings (random batch)",
+          "url": "https://www.oakland.edu/ouinc/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.oakland.edu/ouinc/ on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-oaklanduniversity-offerings",
+            "allowedHosts": ["www.oakland.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": [
+              "startup-ecosystem",
+              "entrepreneurship",
+              "learning-development"
+            ],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.oakland.edu/ouinc/"]
+            },
+            "dom": {
+              "scope": "main#page-content",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".ouResponsiveHomepageHeading > p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".ouResponsiveHomepageHeading > p:nth-of-type(3)",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000074",
+      "locationId": "019a7e02-0000-7000-8000-0000000000d8",
+      "workbookRow": 20,
+      "workbookEntityId": "ferrisstateuniversit",
+      "slug": "ferrisstateuniversit",
+      "name": "Ferris State University",
+      "site": "https://www.ferris.edu/administration/academicaffairs/extendedinternational/cpd/index.htm",
+      "summary": "Lifelong learning strategic priority, cc partnerships.",
+      "city": "Big Rapids",
+      "region": "West Michigan",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-00000000013c",
+          "name": "Ferris State University — public offerings (random batch)",
+          "url": "https://www.ferris.edu/administration/academicaffairs/extendedinternational/cpd/training.htm",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.ferris.edu/administration/academicaffairs/extendedinternational/cpd/training.htm on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-ferrisstateuniversit-offerings",
+            "allowedHosts": ["www.ferris.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.ferris.edu/administration/academicaffairs/extendedinternational/cpd/training.htm"
+              ]
+            },
+            "dom": {
+              "scope": "html",
+              "fields": {
+                "name": {
+                  "selector": "h1.page-title",
+                  "required": true
+                },
+                "description": {
+                  "selector": "main #skipToContent .wysiwygContent p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "main #skipToContent .wysiwygContent p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000075",
+      "locationId": "019a7e02-0000-7000-8000-0000000000d9",
+      "workbookRow": 61,
+      "workbookEntityId": "michiganworkssouthwe",
+      "slug": "michiganworkssouthwe",
+      "name": "Michigan Works! Southwest",
+      "site": "https://www.michiganworkssouthwest.org/",
+      "summary": "Kalamazoo, branch, calhoun, st. joseph counties.",
+      "city": "Kalamazoo",
+      "region": "Southwest",
+      "lanes": ["corporate-careers", "learning-development"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-00000000013d",
+          "name": "Michigan Works! Southwest — public offerings (random batch)",
+          "url": "https://www.michiganworkssouthwest.org/job-seekers/training-opportunities",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.michiganworkssouthwest.org/job-seekers/training-opportunities on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-michiganworkssouthwe-offerings",
+            "allowedHosts": ["www.michiganworkssouthwest.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["corporate-careers", "learning-development"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.michiganworkssouthwest.org/job-seekers/training-opportunities"
+              ]
+            },
+            "dom": {
+              "scope": "#content",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".textwrap p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": ".textwrap p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "019a7e02-0000-7000-8000-000000000320",
+          "name": "Michigan Works! Southwest — career workshops (random batch)",
+          "url": "https://www.michiganworkssouthwest.org/wp-json/tribe/events/v1/events",
+          "target": "events",
+          "enabled": true,
+          "policyNote": "Reviewed public training page, event calendar and its advertised Events Calendar REST endpoint on 2026-11-17. No linked automated-collection prohibition found on inspected pages; no permission asserted. Fetch at most five future events through the robots-aware adapter; keep pending review.",
+          "config": {
+            "version": 1,
+            "key": "random20-michiganworkssouthwe-events",
+            "allowedHosts": ["www.michiganworkssouthwest.org"],
+            "mode": "deterministic",
+            "limit": 5,
+            "lanes": ["corporate-careers", "learning-development"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "tribe-json"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000076",
+      "locationId": "019a7e02-0000-7000-8000-0000000000da",
+      "workbookRow": 118,
+      "workbookEntityId": "detroitmeansbusiness",
+      "slug": "detroitmeansbusiness",
+      "name": "Detroit Means Business",
+      "site": "https://www.detroitmeansbusiness.org/",
+      "summary": "Detroit-based hub supporting minority and small business growth. Programs span capital access, networking, and 1:1 advisory. Operates with regional public-private funding partnerships.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-00000000013e",
+          "name": "Detroit Means Business — public offerings (random batch)",
+          "url": "https://www.detroitmeansbusiness.org/expert-guidance",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed https://www.detroitmeansbusiness.org/expert-guidance on 2026-11-17. Inspected public content and linked usage terms where present; no explicit automated-collection prohibition found on inspected pages. This is not publisher permission. Use the robots-aware fetcher, one public offering page, no publication, no model calls.",
+          "config": {
+            "version": 1,
+            "key": "random20-detroitmeansbusiness-offerings",
+            "allowedHosts": ["www.detroitmeansbusiness.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.detroitmeansbusiness.org/expert-guidance"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "#comp-ku7v6lnu h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": "#comp-ku7v6lnx p",
+                  "required": true
+                },
+                "summary": {
+                  "selector": "#comp-ku7v6lnx p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e02-0000-7000-8000-000000000077",
+      "locationId": "019a7e02-0000-7000-8000-0000000000db",
+      "workbookRow": 102,
+      "workbookEntityId": "miinnovationfund",
+      "slug": "michigan-economic-development-corporation",
+      "name": "Michigan Economic Development Corporation",
+      "site": "https://www.michiganbusiness.org/",
+      "summary": "Michigan Economic Development Corporation administers entrepreneurial support and early-stage funding programs, including the Michigan Innovation Fund.",
+      "city": "Lansing",
+      "region": "Statewide",
+      "lanes": ["startup-ecosystem", "entrepreneurship"],
+      "sources": [
+        {
+          "id": "019a7e02-0000-7000-8000-00000000013f",
+          "name": "MEDC — public offerings (random batch)",
+          "url": "https://www.michiganbusiness.org/services/entrepreneurial-opportunity/early-stage-funding/",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Source unavailable: https://www.michiganbusiness.org/services/entrepreneurial-opportunity/early-stage-funding/ returned HTTP 403. No alternate identity or rendering bypass. Workbook Michigan Innovation Fund is a program; organization owner is MEDC.",
+          "config": {
+            "version": 1,
+            "key": "random20-miinnovationfund-offerings",
+            "allowedHosts": ["www.michiganbusiness.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["startup-ecosystem", "entrepreneurship"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.michiganbusiness.org/services/entrepreneurial-opportunity/early-stage-funding/"
+              ]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

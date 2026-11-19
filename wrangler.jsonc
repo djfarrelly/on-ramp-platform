@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "on-ramp",
+  "main": "src/server.ts",
+  "compatibility_date": "2026-11-12",
+  "compatibility_flags": ["nodejs_compat"],
+  // Do not log request bodies or query strings containing visitor text.
+  "observability": { "enabled": false },
+  "hyperdrive": [
+    {
+      "binding": "HYPERDRIVE",
+      // Replace with a real development Hyperdrive ID before deploying.
+      "id": "00000000000000000000000000000000",
+      "localConnectionString": "postgresql://onramp:onramp_local@127.0.0.1:55432/onramp",
+    },
+  ],
+  // Local bindings work without provisioning. Create these remote resources
+  // explicitly before deploying; no cron is enabled by this prototype pass.
+  "r2_buckets": [
+    {
+      "binding": "INGEST_SNAPSHOTS",
+      "bucket_name": "on-ramp-ingestion-snapshots",
+    },
+  ],
+  "workflows": [
+    {
+      "binding": "INGEST_SOURCE",
+      "name": "on-ramp-ingest-source",
+      "class_name": "IngestSourceWorkflow",
+    },
+  ],
+}

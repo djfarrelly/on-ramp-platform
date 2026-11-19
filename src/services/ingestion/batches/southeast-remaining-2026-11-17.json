@@ -1,0 +1,647 @@
+{
+  "key": "southeast-remaining-2026-11-17",
+  "workbook": "context/mi-ecosystem-data.xlsx",
+  "profiles": [
+    {
+      "id": "019a7e05-0000-7000-8000-000000000064",
+      "locationId": "019a7e05-0000-7000-8000-0000000000c8",
+      "workbookRow": 34,
+      "workbookEntityId": "lawrencetechnologica",
+      "slug": "lawrencetechnologica",
+      "name": "Lawrence Technological University",
+      "site": "https://www.ltu.edu/",
+      "summary": "Houses the Centrepolis Accelerator, supporting hardware and cleantech startups with 30+ experts-in-residence, prototyping resources, and advanced manufacturing connections.",
+      "city": "Southfield",
+      "region": "Detroit Metro",
+      "lanes": [
+        "entrepreneurship",
+        "startup-ecosystem",
+        "learning-development"
+      ],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-00000000012c",
+          "name": "Lawrence Technological University — public offerings (remaining Southeast batch)",
+          "url": "https://www.centrepolisaccelerator.com/Programs/southeast-michigan-sustainable-resilient-supplier-program",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Verified LTU ownership on Centrepolis official public program catalog and detail page. No linked usage policy or explicit automated-collection prohibition found on inspected pages. Import one manufacturer-support program, preserving the official source link; no images, application submissions or cohort-opening claim. Reviewed 2026-11-17. Robots-aware bounded fetching, deterministic extraction, no model calls and pending review only. No publisher endorsement implied.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-lawrencetechnologica-offerings",
+            "allowedHosts": ["www.centrepolisaccelerator.com"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": [
+              "entrepreneurship",
+              "startup-ecosystem",
+              "learning-development"
+            ],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.centrepolisaccelerator.com/Programs/southeast-michigan-sustainable-resilient-supplier-program"
+              ]
+            },
+            "dom": {
+              "scope": "main#main-content",
+              "fields": {
+                "name": {
+                  "selector": "h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".home-banner_content p, .innovators-section-intro p, .add-bullets-wrap p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-000000000065",
+      "locationId": "019a7e05-0000-7000-8000-0000000000c9",
+      "workbookRow": 42,
+      "workbookEntityId": "macombstclairmichiga",
+      "slug": "macombstclairmichiga",
+      "name": "Macomb/St. Clair Michigan Works!",
+      "site": "https://msc-mw.org/",
+      "summary": "Macomb and st. clair counties, manufacturing workforce.",
+      "city": "Clinton Township",
+      "region": "Detroit Metro",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-00000000012d",
+          "name": "Macomb/St. Clair Michigan Works! — public offerings (remaining Southeast batch)",
+          "url": "https://msc-mw.org/class/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Workbook macomb-stclairworks.org failed robots verification. Public search identified the current official publisher msc-mw.org; verified the Macomb/St. Clair Michigan Works identity on its page and linked privacy policy https://msc-mw.org/privacy-policy/. This is its current official site, not a proxy of a restricted page. No collection prohibition found on inspected pages. Preserve WIOA/TAA assessment and county eligibility; tuition assistance is not guaranteed. Reviewed 2026-11-17. Robots-aware bounded fetching, deterministic extraction, no model calls and pending review only. No publisher endorsement implied.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-macombstclairmichiga-offerings",
+            "allowedHosts": ["msc-mw.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://msc-mw.org/class/"]
+            },
+            "dom": {
+              "scope": "main#content",
+              "fields": {
+                "name": {
+                  "selector": "h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".elementor-element-5ee23a4 p, .elementor-element-5377518 p, .elementor-element-5377518 li, .elementor-element-41e1d57 p, .elementor-element-0a187a4 p",
+                  "required": true
+                },
+                "eligibilitySummary": {
+                  "selector": ".elementor-element-5377518 p, .elementor-element-5377518 li, .elementor-element-41e1d57 p, .elementor-element-0a187a4 p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-000000000066",
+      "locationId": "019a7e05-0000-7000-8000-0000000000ca",
+      "workbookRow": 60,
+      "workbookEntityId": "miworksse",
+      "slug": "miworksse",
+      "name": "Michigan Works! Southeast",
+      "site": "https://www.mwse.org/",
+      "summary": "Michigan Works! Southeast connects job seekers and employers across Hillsdale, Jackson, Lenawee, Livingston and Washtenaw counties, with career services, training and workforce education.",
+      "city": "Adrian",
+      "region": "Southeast",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-00000000012e",
+          "name": "Michigan Works! Southeast — public offerings (remaining Southeast batch)",
+          "url": "https://www.mwse.org/adult-education/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Corrected workbook miworks.org to the current official Michigan Works! Southeast site, mwse.org. Verified current five-county service area (Hillsdale, Jackson, Lenawee, Livingston, Washtenaw) from its home page; workbook Monroe claim is not retained in the imported profile. Reviewed public workforce-education page, home page and calendar; no linked usage policy or explicit automated-collection prohibition found. Preserve the page’s county-specific delivery limits and partner attribution; do not infer which partner serves a county beyond the source wording. Reviewed 2026-11-17. Robots-aware bounded fetching, deterministic extraction, no model calls and pending review only. No publisher endorsement implied.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-miworksse-offerings",
+            "allowedHosts": ["www.mwse.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.mwse.org/adult-education/"]
+            },
+            "dom": {
+              "scope": "body",
+              "fields": {
+                "name": {
+                  "selector": "h1.title",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".mcb-item-8vcollwfo p, .mcb-item-bey00yzgn p",
+                  "required": true
+                },
+                "eligibilitySummary": {
+                  "selector": ".mcb-item-bey00yzgn p",
+                  "required": true
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "019a7e05-0000-7000-8000-000000000320",
+          "name": "Michigan Works! Southeast — provider-organized workshops",
+          "url": "https://www.mwse.org/wp-json/tribe/events/v1/events?organizer=7901&start_date=2026-11-17&per_page=10",
+          "target": "events",
+          "enabled": true,
+          "policyNote": "Reviewed public calendar and advertised Events Calendar REST feed on 2026-11-17. Filter organizer=7901 (Michigan Works! Southeast), with a manual-batch lower bound start_date=2026-11-17; verify every returned organizer. Import at most three not-ended workshops using provider IDs and observed UTC dates. No employer vacancy or unrelated event import, model calls or publication. Advance the date bound when preparing a later batch; no cron enabled.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-miworksse-events",
+            "allowedHosts": ["www.mwse.org"],
+            "mode": "deterministic",
+            "limit": 3,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "tribe-json"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-000000000067",
+      "locationId": "019a7e05-0000-7000-8000-0000000000cb",
+      "workbookRow": 72,
+      "workbookEntityId": "oaklandcommunitycoll",
+      "slug": "oaklandcommunitycoll",
+      "name": "Oakland Community College",
+      "site": "https://www.oaklandcc.edu/",
+      "summary": "5 campuses, oakland county business ecosystem, culinary entrepreneurship.",
+      "city": "Bloomfield Hills",
+      "region": "Detroit Metro",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-00000000012f",
+          "name": "Oakland Community College — public offerings (remaining Southeast batch)",
+          "url": "https://www.oaklandcc.edu/workforce-development/custom-training.html",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Workbook /workforce URL returns 404. Verified current public Economic and Workforce Development site and linked Custom Training Solutions page. Reviewed https://www.oaklandcc.edu/about/privacy.html; no automated-collection prohibition found in inspected pages. This is employer-focused custom training; no individual open enrollment, fixed price or schedule inferred. Reviewed 2026-11-17. Robots-aware bounded fetching, deterministic extraction, no model calls and pending review only. No publisher endorsement implied.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-oaklandcommunitycoll-offerings",
+            "allowedHosts": ["www.oaklandcc.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.oaklandcc.edu/workforce-development/custom-training.html"
+              ]
+            },
+            "dom": {
+              "scope": "main#main-content",
+              "fields": {
+                "name": {
+                  "selector": "h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".container:first .col-lg-8 p, .container:first .col-lg-8 li",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-000000000068",
+      "locationId": "019a7e05-0000-7000-8000-0000000000cc",
+      "workbookRow": 73,
+      "workbookEntityId": "oaklandcountymichiga",
+      "slug": "oaklandcountymichiga",
+      "name": "Oakland County Michigan Works!",
+      "site": "https://www.oakgov.com/",
+      "summary": "Oakland county, strong employer partnerships.",
+      "city": "Pontiac",
+      "region": "Detroit Metro",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-000000000130",
+          "name": "Oakland County Michigan Works! — public offerings (remaining Southeast batch)",
+          "url": "https://www.oakgov.com/miworks",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Robots verification hold: the robots-aware fetcher could not verify robots.txt for www.oakgov.com. No detail content imported and no rendering/model substitute; restore policy access before enabling.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-oaklandcountymichiga-offerings",
+            "allowedHosts": ["www.oakgov.com"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.oakgov.com/miworks"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-000000000069",
+      "locationId": "019a7e05-0000-7000-8000-0000000000cd",
+      "workbookRow": 77,
+      "workbookEntityId": "purposejobs",
+      "slug": "purposejobs",
+      "name": "Purpose Jobs",
+      "site": "https://www.purpose.jobs/",
+      "summary": "Michigan-focused tech and startup jobs community with company profiles, salary data, and culture content. Covers Detroit, Ann Arbor, and Grand Rapids ecosystems.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["corporate-careers", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-000000000131",
+          "name": "Purpose Jobs — public offerings (remaining Southeast batch)",
+          "url": "https://www.purpose.jobs/slack?hsLang=en",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed the public Slack community landing page and https://www.purpose.jobs/legal?hsLang=en. Terms prohibit bot-created accounts; this import only reads public landing-page content and creates no account or Slack access. No prohibition of this bounded public-page collection found. Import the community resource only, with source link; no job vacancies, candidate profiles, Slack messages or registration details collected. Reviewed 2026-11-17. Robots-aware bounded fetching, deterministic extraction, no model calls and pending review only. No publisher endorsement implied.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-purposejobs-offerings",
+            "allowedHosts": ["www.purpose.jobs"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["corporate-careers", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.purpose.jobs/slack?hsLang=en"]
+            },
+            "dom": {
+              "scope": "html",
+              "fields": {
+                "name": {
+                  "selector": "head > title",
+                  "required": true
+                },
+                "description": {
+                  "selector": "main .oc__row__text-content p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-00000000006a",
+      "locationId": "019a7e05-0000-7000-8000-0000000000ce",
+      "workbookRow": 79,
+      "workbookEntityId": "scoreannarborarea",
+      "slug": "scoreannarborarea",
+      "name": "SCORE Ann Arbor Area",
+      "site": "https://www.score.org/",
+      "summary": "Volunteer mentors, free workshops, washtenaw/livingston counties.",
+      "city": "Ann Arbor",
+      "region": "Southeast",
+      "lanes": ["entrepreneurship"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-000000000132",
+          "name": "SCORE Ann Arbor Area — public offerings (remaining Southeast batch)",
+          "url": "https://www.score.org/mi/ann-arbor-area/",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Access hold: canonical https://www.score.org/mi/ann-arbor-area/ returned HTTP 403 through the robots-aware fetcher. No alternate scraper or cached-search import; keep disabled until access is resolved.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-scoreannarborarea-offerings",
+            "allowedHosts": ["www.score.org"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://www.score.org/mi/ann-arbor-area/"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-00000000006b",
+      "locationId": "019a7e05-0000-7000-8000-0000000000cf",
+      "workbookRow": 86,
+      "workbookEntityId": "schoolcraftcollege",
+      "slug": "schoolcraftcollege",
+      "name": "Schoolcraft College",
+      "site": "https://www.schoolcraft.edu/",
+      "summary": "Mi-sbdc satellite, continuing ed & professional development.",
+      "city": "Livonia",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "learning-development"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-000000000133",
+          "name": "Schoolcraft College — public offerings (remaining Southeast batch)",
+          "url": "https://www.schoolcraft.edu/business-development-center/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Workbook /business page does not expose the current BDC offering. Verified current official Business Development Center page, including consulting, contracting assistance and workforce training. Its linked legacy /bdc/services/apex/ page returns 404; no separate APEX listing imported. No linked usage policy or automated-collection prohibition found on inspected page. Preserve subprovider attribution and no-cost scope as stated; no current workshop dates inferred. Reviewed 2026-11-17. Robots-aware bounded fetching, deterministic extraction, no model calls and pending review only. No publisher endorsement implied.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-schoolcraftcollege-offerings",
+            "allowedHosts": ["www.schoolcraft.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["entrepreneurship", "learning-development"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.schoolcraft.edu/business-development-center/"
+              ]
+            },
+            "dom": {
+              "scope": "main#genesis-content article",
+              "fields": {
+                "name": {
+                  "selector": "h1.wp-block-heading:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".entry-content p:not(:has(a))",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-00000000006c",
+      "locationId": "019a7e05-0000-7000-8000-0000000000d0",
+      "workbookRow": 89,
+      "workbookEntityId": "universityofmichigan",
+      "slug": "universityofmichigan",
+      "name": "University of Michigan",
+      "site": "https://michiganross.umich.edu/",
+      "summary": "The University of Michigan offers extensive professional development through Ross Executive Education (30+ programs), the Center for Entrepreneurship, Engineering bootcamps, and Innovation Partnerships.",
+      "city": "Ann Arbor",
+      "region": "Southeast",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-000000000134",
+          "name": "University of Michigan — public offerings (remaining Southeast batch)",
+          "url": "https://michiganross.umich.edu/programs/executive-education",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Access hold: https://michiganross.umich.edu/programs/executive-education returned HTTP 403 through the robots-aware fetcher. Keep disabled; no model or rendering bypass.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-universityofmichigan-offerings",
+            "allowedHosts": ["michiganross.umich.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://michiganross.umich.edu/programs/executive-education"
+              ]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-00000000006d",
+      "locationId": "019a7e05-0000-7000-8000-0000000000d1",
+      "workbookRow": 90,
+      "workbookEntityId": "umdearborn",
+      "slug": "umdearborn",
+      "name": "University of Michigan - Dearborn",
+      "site": "https://umdearborn.edu/",
+      "summary": "Engineering innovation labs, automotive industry connections.",
+      "city": "Dearborn",
+      "region": "Detroit Metro",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-000000000135",
+          "name": "University of Michigan - Dearborn — public offerings (remaining Southeast batch)",
+          "url": "https://umdearborn.edu/cob/business-community/professional-development-programs",
+          "target": "offerings",
+          "enabled": false,
+          "policyNote": "Access hold: https://umdearborn.edu/ returned HTTP 403 through the robots-aware fetcher. Keep the official professional-development source disabled until access is resolved; no alternate scraper or cached-search import.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-umdearborn-offerings",
+            "allowedHosts": ["umdearborn.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://umdearborn.edu/cob/business-community/professional-development-programs"
+              ]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-00000000006e",
+      "locationId": "019a7e05-0000-7000-8000-0000000000d2",
+      "workbookRow": 93,
+      "workbookEntityId": "velocitycenter",
+      "slug": "velocitycenter",
+      "name": "Velocity Center",
+      "site": "https://www.mivelocity.com/",
+      "summary": "Sterling Heights' MEDC-designated SmartZone, focused on advanced manufacturing and technology startups. Partners with the Michigan SBDC to provide business acceleration, mentorship, and prototyping support.",
+      "city": "Sterling Heights",
+      "region": "Detroit Metro",
+      "lanes": ["entrepreneurship", "startup-ecosystem"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-000000000136",
+          "name": "Velocity Center — public offerings (remaining Southeast batch)",
+          "url": "https://www.mivelocity.com/accelerator-program",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Reviewed official Accelerator and Incubator public pages and home-page links. No linked usage policy or explicit automated-collection prohibition found. Preserve the distinction between emerging second-stage businesses (at or positioned for $1M revenue) and early product-development startups. No application submitted and no current cohort dates inferred. Reviewed 2026-11-17. Robots-aware bounded fetching, deterministic extraction, no model calls and pending review only. No publisher endorsement implied.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-velocitycenter-offerings",
+            "allowedHosts": ["www.mivelocity.com"],
+            "mode": "deterministic",
+            "limit": 2,
+            "lanes": ["entrepreneurship", "startup-ecosystem"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": [
+                "https://www.mivelocity.com/accelerator-program",
+                "https://www.mivelocity.com/incubator-program"
+              ]
+            },
+            "dom": {
+              "scope": "main#PAGES_CONTAINER",
+              "fields": {
+                "name": {
+                  "selector": "h1:first",
+                  "required": true
+                },
+                "description": {
+                  "selector": "#comp-m5v32xvp1 p, #comp-m5v33rwb3 p, #comp-m5v33rwi p",
+                  "required": true
+                },
+                "eligibilitySummary": {
+                  "selector": "#comp-m5v32xvp1 p:last, #comp-m5v33rwi p:first",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "019a7e05-0000-7000-8000-00000000006f",
+      "locationId": "019a7e05-0000-7000-8000-0000000000d3",
+      "workbookRow": 96,
+      "workbookEntityId": "waynestateuniversity",
+      "slug": "waynestateuniversity",
+      "name": "Wayne State University",
+      "site": "https://wayne.edu/",
+      "summary": "Wayne State University in Detroit provides Executive and Professional Development services, including customized leadership and workforce training for organizations.",
+      "city": "Detroit",
+      "region": "Detroit Metro",
+      "lanes": ["learning-development", "corporate-careers"],
+      "sources": [
+        {
+          "id": "019a7e05-0000-7000-8000-000000000137",
+          "name": "Wayne State University — public offerings (remaining Southeast batch)",
+          "url": "https://execed.wayne.edu/",
+          "target": "offerings",
+          "enabled": true,
+          "policyNote": "Workbook Wayne State row points to TechTown, already registered and disabled for its automated-collection restriction. Do not duplicate, enable or fetch TechTown. Verified Wayne State’s own official Executive and Professional Development page instead; reviewed https://wayne.edu/policies, /policies/privacy, /policies/acceptable-use and /policies/disclaimer. Import only public employer-training description with source link; no TechTown content, people or application data. No automated-collection prohibition found for this bounded read. Reviewed 2026-11-17. Robots-aware bounded fetching, deterministic extraction, no model calls and pending review only. No publisher endorsement implied.",
+          "config": {
+            "version": 1,
+            "key": "se-rest-waynestateuniversity-offerings",
+            "allowedHosts": ["execed.wayne.edu"],
+            "mode": "deterministic",
+            "limit": 1,
+            "lanes": ["learning-development", "corporate-careers"],
+            "timezone": "America/Detroit",
+            "discovery": {
+              "type": "pages",
+              "urls": ["https://execed.wayne.edu/"]
+            },
+            "dom": {
+              "scope": "main",
+              "fields": {
+                "name": {
+                  "selector": "h1",
+                  "required": true
+                },
+                "description": {
+                  "selector": ".content > .pb-1 p",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
