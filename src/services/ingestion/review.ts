@@ -5,24 +5,20 @@ import {
   offerings,
   events,
   sources,
-  users,
   offeringLanes,
+  offeringTags,
+  eventTags,
 } from '../../db/schema'
 import { ingestionInputs } from './contracts'
+import { listRecordTagState } from '../tagging/readiness'
+import { decideTaggingProposal } from '../tagging'
 
-export class ReviewAccessError extends Error {}
-export class ReviewConflictError extends Error {}
-
-export async function assertStaff(db: Database, userId: string) {
-  const [user] = await db.select().from(users).where(eq(users.id, userId))
-  if (
-    !user ||
-    !['admin', 'mt_staff'].includes(user.platformRole) ||
-    user.status !== 'active'
-  )
-    throw new ReviewAccessError('An active staff reviewer is required')
-  return user
-}
+export {
+  ReviewAccessError,
+  ReviewConflictError,
+  assertStaff,
+} from './review-access'
+import { ReviewConflictError, assertStaff } from './review-access'
 export async function listProposals(db: Database, sourceId?: string) {
   const orgRows = sourceId
     ? []
@@ -146,13 +142,50 @@ export async function reviewProposal(
         'Proposal changed; inspect it again before reviewing',
       )
     const now = new Date()
+    const tagState = (
+      await listRecordTagState(tx, [
+        { id: row.id, type: args.type, updatedAt: row.updatedAt },
+      ])
+    ).get(row.id)!
     if (args.decision === 'reject') {
+      if (tagState.status === 'pending_review' && tagState.proposal)
+        await decideTaggingProposal(
+          tx,
+          {
+            proposalId: tagState.proposal.id,
+            expectedUpdatedAt: tagState.proposal.updatedAt,
+            decision: 'reject',
+          },
+          reviewerId,
+        )
       await tx
         .update(table)
         .set({ status: 'rejected', reviewedBy: reviewerId, reviewedAt: now })
         .where(eq(table.id, row.id))
       return { id: row.id, status: 'rejected' }
     }
+    if (!tagState.ready)
+      throw new ReviewConflictError(
+        'This record is still awaiting ingestion tagging and is not ready for review.',
+      )
+    if (
+      tagState.proposal &&
+      (args.expectedTagProposal?.id !== tagState.proposal.id ||
+        args.expectedTagProposal?.updatedAt !== tagState.proposal.updatedAt)
+    )
+      throw new ReviewConflictError(
+        'Tags changed; refresh the record and inspect its tags before publishing.',
+      )
+    if (tagState.status === 'pending_review' && tagState.proposal)
+      await decideTaggingProposal(
+        tx,
+        {
+          proposalId: tagState.proposal.id,
+          expectedUpdatedAt: tagState.proposal.updatedAt,
+          decision: 'approve',
+        },
+        reviewerId,
+      )
     if (args.type === 'organization') {
       await tx
         .update(organizations)
@@ -234,6 +267,15 @@ export async function reviewProposal(
         await tx
           .insert(offeringLanes)
           .values(assignments.map((a) => ({ ...a, offeringId: current.id })))
+        const approvedTags = await tx
+          .select()
+          .from(offeringTags)
+          .where(eq(offeringTags.offeringId, p.id))
+        if (approvedTags.length)
+          await tx
+            .insert(offeringTags)
+            .values(approvedTags.map((t) => ({ ...t, offeringId: current.id })))
+            .onConflictDoNothing()
         await tx
           .update(offerings)
           .set({ status: 'archived', reviewedAt: now, reviewedBy: reviewerId })
@@ -287,6 +329,15 @@ export async function reviewProposal(
             lastVerifiedAt: now,
           })
           .where(eq(events.id, current.id))
+        const approvedTags = await tx
+          .select()
+          .from(eventTags)
+          .where(eq(eventTags.eventId, p.id))
+        if (approvedTags.length)
+          await tx
+            .insert(eventTags)
+            .values(approvedTags.map((t) => ({ ...t, eventId: current.id })))
+            .onConflictDoNothing()
         await tx
           .update(events)
           .set({ status: 'archived', reviewedAt: now, reviewedBy: reviewerId })

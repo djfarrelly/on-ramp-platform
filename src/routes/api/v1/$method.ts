@@ -5,6 +5,11 @@ export const Route = createFileRoute('/api/v1/$method')({
   server: {
     handlers: {
       POST: async ({ request, params }) => {
+        if (params.method.startsWith('tagging.')) {
+          const { handleTaggingRpc } =
+            await import('../../../server/tagging-rpc')
+          return handleTaggingRpc(request, params.method, import.meta.env.DEV)
+        }
         if (params.method.startsWith('review.')) {
           const { handleReviewRpc } = await import('../../../server/review-rpc')
           return handleReviewRpc(request, params.method, import.meta.env.DEV)

@@ -629,70 +629,128 @@ export const eventTags = pgTable(
 )
 
 // Pending classification is separate from listing publication and canonical tags.
-export const taggingRuns = pgTable('tagging_runs', {
-  id: uuid('id').primaryKey(),
-  mode: text('mode').notNull(),
-  status: text('status').notNull(),
-  taxonomyVersion: text('taxonomy_version').notNull(),
-  promptVersion: text('prompt_version').notNull(),
-  model: text('model'),
-  selection: jsonb('selection').notNull(),
-  configSnapshot: jsonb('config_snapshot').notNull(),
-  itemsCompleted: integer('items_completed').notNull().default(0),
-  itemsFailed: integer('items_failed').notNull().default(0),
-  usage: jsonb('usage'),
-  createdBy: uuid('created_by').notNull().references((): AnyPgColumn => users.id),
-  createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull(),
-}, (t) => [
-  index('tagging_runs_created_by_idx').on(t.createdBy),
-  check('tagging_runs_mode_check', sql`${t.mode} in ('deterministic', 'hybrid')`),
-  check('tagging_runs_status_check', sql`${t.status} in ('running', 'success', 'partial', 'failed')`),
-])
+export const taggingRuns = pgTable(
+  'tagging_runs',
+  {
+    id: uuid('id').primaryKey(),
+    mode: text('mode').notNull(),
+    status: text('status').notNull(),
+    taxonomyVersion: text('taxonomy_version').notNull(),
+    promptVersion: text('prompt_version').notNull(),
+    model: text('model'),
+    selection: jsonb('selection').notNull(),
+    configSnapshot: jsonb('config_snapshot').notNull(),
+    itemsCompleted: integer('items_completed').notNull().default(0),
+    itemsFailed: integer('items_failed').notNull().default(0),
+    usage: jsonb('usage'),
+    createdBy: uuid('created_by')
+      .notNull()
+      .references((): AnyPgColumn => users.id),
+    createdAt: timestamp('created_at', {
+      withTimezone: true,
+      mode: 'date',
+    }).notNull(),
+    updatedAt: timestamp('updated_at', {
+      withTimezone: true,
+      mode: 'date',
+    }).notNull(),
+  },
+  (t) => [
+    index('tagging_runs_created_by_idx').on(t.createdBy),
+    check(
+      'tagging_runs_mode_check',
+      sql`${t.mode} in ('deterministic', 'hybrid')`,
+    ),
+    check(
+      'tagging_runs_status_check',
+      sql`${t.status} in ('running', 'success', 'partial', 'failed')`,
+    ),
+  ],
+)
 
-export const taggingProposals = pgTable('tagging_proposals', {
-  id: uuid('id').primaryKey(),
-  runId: uuid('run_id').notNull().references((): AnyPgColumn => taggingRuns.id),
-  organizationId: uuid('organization_id').references((): AnyPgColumn => organizations.id),
-  offeringId: uuid('offering_id').references((): AnyPgColumn => offerings.id),
-  eventId: uuid('event_id').references((): AnyPgColumn => events.id),
-  contentHash: text('content_hash').notNull(),
-  tagSetHash: text('tag_set_hash').notNull(),
-  recordUpdatedAt: timestamp('record_updated_at', { withTimezone: true, mode: 'date' }).notNull(),
-  snapshot: jsonb('snapshot').notNull(),
-  status: text('status').notNull().default('pending_review'),
-  issues: jsonb('issues').notNull(),
-  errorCode: text('error_code'),
-  usage: jsonb('usage'),
-  reviewNote: text('review_note'),
-  reviewedBy: uuid('reviewed_by').references((): AnyPgColumn => users.id),
-  reviewedAt: timestamp('reviewed_at', { withTimezone: true, mode: 'date' }),
-  createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull(),
-}, (t) => [
-  check('tagging_proposals_one_entity_check', sql`num_nonnulls(${t.organizationId}, ${t.offeringId}, ${t.eventId}) = 1`),
-  check('tagging_proposals_status_check', sql`${t.status} in ('pending_review', 'approved', 'rejected')`),
-  index('tagging_proposals_run_idx').on(t.runId),
-  index('tagging_proposals_organization_idx').on(t.organizationId),
-  index('tagging_proposals_offering_idx').on(t.offeringId),
-  index('tagging_proposals_event_idx').on(t.eventId),
-  index('tagging_proposals_reviewer_idx').on(t.reviewedBy),
-])
+export const taggingProposals = pgTable(
+  'tagging_proposals',
+  {
+    id: uuid('id').primaryKey(),
+    runId: uuid('run_id')
+      .notNull()
+      .references((): AnyPgColumn => taggingRuns.id),
+    organizationId: uuid('organization_id').references(
+      (): AnyPgColumn => organizations.id,
+    ),
+    offeringId: uuid('offering_id').references((): AnyPgColumn => offerings.id),
+    eventId: uuid('event_id').references((): AnyPgColumn => events.id),
+    contentHash: text('content_hash').notNull(),
+    tagSetHash: text('tag_set_hash').notNull(),
+    recordUpdatedAt: timestamp('record_updated_at', {
+      withTimezone: true,
+      mode: 'date',
+    }).notNull(),
+    snapshot: jsonb('snapshot').notNull(),
+    status: text('status').notNull().default('pending_review'),
+    issues: jsonb('issues').notNull(),
+    errorCode: text('error_code'),
+    usage: jsonb('usage'),
+    reviewNote: text('review_note'),
+    reviewedBy: uuid('reviewed_by').references((): AnyPgColumn => users.id),
+    reviewedAt: timestamp('reviewed_at', { withTimezone: true, mode: 'date' }),
+    createdAt: timestamp('created_at', {
+      withTimezone: true,
+      mode: 'date',
+    }).notNull(),
+    updatedAt: timestamp('updated_at', {
+      withTimezone: true,
+      mode: 'date',
+    }).notNull(),
+  },
+  (t) => [
+    check(
+      'tagging_proposals_one_entity_check',
+      sql`num_nonnulls(${t.organizationId}, ${t.offeringId}, ${t.eventId}) = 1`,
+    ),
+    check(
+      'tagging_proposals_status_check',
+      sql`${t.status} in ('pending_review', 'approved', 'rejected')`,
+    ),
+    index('tagging_proposals_run_idx').on(t.runId),
+    index('tagging_proposals_organization_idx').on(t.organizationId),
+    index('tagging_proposals_offering_idx').on(t.offeringId),
+    index('tagging_proposals_event_idx').on(t.eventId),
+    index('tagging_proposals_reviewer_idx').on(t.reviewedBy),
+  ],
+)
 
-export const taggingSuggestions = pgTable('tagging_suggestions', {
-  proposalId: uuid('proposal_id').notNull().references((): AnyPgColumn => taggingProposals.id),
-  tagId: uuid('tag_id').notNull().references((): AnyPgColumn => tags.id),
-  basis: text('basis').notNull(),
-  evidenceField: text('evidence_field').notNull(),
-  evidenceQuote: text('evidence_quote').notNull(),
-  isSelected: boolean('is_selected').notNull().default(true),
-  createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).notNull(),
-}, (t) => [
-  primaryKey({ columns: [t.proposalId, t.tagId] }),
-  index('tagging_suggestions_tag_idx').on(t.tagId),
-  check('tagging_suggestions_basis_check', sql`${t.basis} in ('rule', 'model', 'reviewer')`),
-])
+export const taggingSuggestions = pgTable(
+  'tagging_suggestions',
+  {
+    proposalId: uuid('proposal_id')
+      .notNull()
+      .references((): AnyPgColumn => taggingProposals.id),
+    tagId: uuid('tag_id')
+      .notNull()
+      .references((): AnyPgColumn => tags.id),
+    basis: text('basis').notNull(),
+    evidenceField: text('evidence_field').notNull(),
+    evidenceQuote: text('evidence_quote').notNull(),
+    isSelected: boolean('is_selected').notNull().default(true),
+    createdAt: timestamp('created_at', {
+      withTimezone: true,
+      mode: 'date',
+    }).notNull(),
+    updatedAt: timestamp('updated_at', {
+      withTimezone: true,
+      mode: 'date',
+    }).notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.proposalId, t.tagId] }),
+    index('tagging_suggestions_tag_idx').on(t.tagId),
+    check(
+      'tagging_suggestions_basis_check',
+      sql`${t.basis} in ('rule', 'model', 'reviewer')`,
+    ),
+  ],
+)
 
 export const sources = pgTable(
   'sources',

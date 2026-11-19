@@ -3,6 +3,7 @@ import { resolve, join } from 'node:path'
 import { z } from 'zod'
 import { createPublicFetcher } from '../src/server/ingestion/fetch'
 import { createGatewayExtractor } from '../src/server/ingestion/llm'
+import { ingestionTaggingModel } from '../src/server/tagging/ingestion-model'
 import type {
   IngestionPorts,
   Document,
@@ -49,6 +50,8 @@ export async function filePorts(replayRunId?: string): Promise<IngestionPorts> {
   }
   const publicFetch = createPublicFetcher()
   return {
+    tagging: ingestionTaggingModel(process.env),
+    taggingReviewerId: process.env.INGEST_REVIEWER_ID,
     asOf,
     fetchDocument: documents
       ? async (url) => {

@@ -12,6 +12,30 @@ Missing fields are labeled **Not provided**. Event times include the source
 timezone. Source text renders as plain text and external links allow only HTTP
 or HTTPS URLs without embedded credentials.
 
+Only records with current, non-empty, usable tags appear in this queue. Missing,
+failed, rejected or stale tagging stays in ingestion; the page shows a waiting
+count without presenting those records for review. This readiness rule is also
+enforced by the publication service, including CLI and private RPC calls.
+
+The **Tags** panel groups tags under bold category headings and shows supporting
+source evidence and rule/model review flags. Choose **Edit tags** to remove a
+suggestion, search the controlled vocabulary by name or meaning, or narrow it by
+category. New tags require a supporting source quote. Save changes or cancel;
+listing navigation, editing and publication pause while the editor is open.
+Saving no selected tags returns the record to ingestion. Approved canonical tags
+remain additive in the current prototype.
+
+**Approve & publish** approves the listing and its selected tags in one database
+transaction. There is no separate tag-review page or tag approval step. The
+service checks both the listing timestamp and the tag proposal ID/timestamp, so
+concurrent tag edits cannot be published unseen. Parent, lane or event-date
+validation failures roll back tag approval too. Published revisions retain the
+canonical record ID/URL and receive the approved tags.
+
+Content edits create a fresh tag snapshot retaining only selections whose exact
+source quotes still exist. The previous snapshot remains in the audit history.
+Removed evidence drops its tag; if none remain, the record returns to ingestion.
+
 Choose **Approve & publish** or **Reject proposal** for the selected record.
 Approval publishes immediately to the configured database; rejection keeps the
 record out of the public directory. There are no bulk actions.

@@ -1,10 +1,10 @@
 # Taxonomy and matching analysis
 
-November 17, 2026
+Inventory audited November 17, 2026. Implementation updated November 19, 2026.
 
 On-Ramp should keep its four lanes and add a small, shared vocabulary organized
 around what a person wants, the help an offering provides, and its actual
-subject matter. Start with **44 broad terms in six independent groups**. Most
+subject matter. The implemented vocabulary has **45 broad terms in six independent groups**. Most
 listings should need four to six terms. Industry, audience and business stage
 are optional refinements. Specific tools, job titles and certification names
 remain searchable text until repeated demand justifies a distinct filter.
@@ -14,8 +14,10 @@ future they want. Matching must preserve that distinction: an experienced
 manufacturing professional who wants to start a consulting business should be
 able to find business advice without being restricted to manufacturing courses.
 
-This is a proposal for review. No database tags, listing fields, source settings
-or publication decisions were changed.
+The [tagging workflow](tagging.md) implements the vocabulary and pending
+assignment review. AI and data are separate topics following the November 19
+decision. Other support-type trade-offs remain accepted. The inventory findings
+below describe the November 17 snapshot, before tagging proposals were created.
 
 ## Inventory and evidence
 
@@ -55,7 +57,7 @@ It did not recrawl websites or reverify old workbook assertions.
 
 The schema already has `tags`, a free-text `group_label`, optional
 `parent_tag_id`, and separate organization, offering and event tag joins.
-**There are currently zero tag definitions and zero assignments.** Organization
+**At the audit there were zero tag definitions and zero assignments.** Organization
 and offering lane assignments exist, but recent imports use provisional
 source-level defaults. Events have no lane join and discovery uses the host
 organization's lanes.
@@ -133,17 +135,17 @@ across lanes. Avoid a deep hierarchy and combinatorial terms such as “AI for
 healthcare project managers.” That query can combine a topic, industry and
 confirmed user context.
 
-| Group              | Question                                 | Initial terms                                                                                                                                                                                                                                                                   |
-| ------------------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Goal — 9           | What do you want to accomplish?          | Find a job; Change careers; Return to work; Advance into leadership; Build skills or earn a credential; Explore or start a business; Grow a business; Find business funding; Build professional connections                                                                     |
-| Support — 8        | What kind of help is available?          | Training & education; Coaching & advice; Job search & employer connections; Networking & community; Incubation & acceleration; Funding & financial assistance; Workspace & prototyping; Resources & tools                                                                       |
-| Topic — 10         | What would you like to learn or work on? | AI & data; Software, IT & cybersecurity; Digital workplace skills; Leadership & communication; Project & process management; Business planning & strategy; Marketing & sales; Finance & financial literacy; Product design & commercialization; Technical & occupational skills |
-| Industry — 8       | Is there a relevant industry focus?      | Manufacturing & hardware; Mobility & transportation; Energy & environment; Healthcare & life sciences; Software & digital technology; Education; Government & public service; Retail, food & local services                                                                     |
-| Audience — 5       | Who is this designed to serve?           | Individuals & professionals; Founders & aspiring entrepreneurs; Business owners & operators; Employers & teams; Students & enrolled learners                                                                                                                                    |
-| Business stage — 4 | Where is the business, if relevant?      | Exploring an idea; Starting & validating; Operating & growing; Scaling & expanding                                                                                                                                                                                              |
+| Group              | Question                                 | Initial terms                                                                                                                                                                                                                                                                                                   |
+| ------------------ | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Goal — 9           | What do you want to accomplish?          | Find a job; Change careers; Return to work; Advance into leadership; Build skills or earn a credential; Explore or start a business; Grow a business; Find business funding; Build professional connections                                                                                                     |
+| Support — 8        | What kind of help is available?          | Training & education; Coaching & advice; Job search & employer connections; Networking & community; Incubation & acceleration; Funding & financial assistance; Workspace & prototyping; Resources & tools                                                                                                       |
+| Topic — 11         | What would you like to learn or work on? | Artificial intelligence; Data & analytics; Software, IT & cybersecurity; Digital workplace skills; Leadership & communication; Project & process management; Business planning & strategy; Marketing & sales; Finance & financial literacy; Product design & commercialization; Technical & occupational skills |
+| Industry — 8       | Is there a relevant industry focus?      | Manufacturing & hardware; Mobility & transportation; Energy & environment; Healthcare & life sciences; Software & digital technology; Education; Government & public service; Retail, food & local services                                                                                                     |
+| Audience — 5       | Who is this designed to serve?           | Individuals & professionals; Founders & aspiring entrepreneurs; Business owners & operators; Employers & teams; Students & enrolled learners                                                                                                                                                                    |
+| Business stage — 4 | Where is the business, if relevant?      | Exploring an idea; Starting & validating; Operating & growing; Scaling & expanding                                                                                                                                                                                                                              |
 
-The [draft vocabulary](taxonomy-proposal.json) defines every term and its
-boundaries. It is not loaded into the application. Search phrases are retrieval
+The [implemented vocabulary](taxonomy-proposal.json) defines every term and its
+boundaries. Assignments remain pending until individually reviewed. Search phrases are retrieval
 hints, not instructions to assign a fact whenever a word appears.
 
 Only goal, support and topic need prominent exposure at first. Offer industry,

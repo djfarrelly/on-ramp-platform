@@ -21,6 +21,9 @@ import {
   extractionMode,
 } from '../src/services/ingestion/contracts'
 import { filePorts } from './ingestion-runtime'
+import { tagPendingIngestion } from '../src/services/tagging/ingestion'
+import { localReviewerId } from '../src/services/ingestion/bootstrap'
+import { ingestionTaggingModel } from '../src/server/tagging/ingestion-model'
 
 const { positionals, values } = parseArgs({
   allowPositionals: true,
@@ -37,21 +40,25 @@ const { positionals, values } = parseArgs({
     id: { type: 'string' },
     decision: { type: 'string' },
     expected: { type: 'string' },
+    'tag-proposal': { type: 'string' },
+    'tag-expected': { type: 'string' },
     reviewer: { type: 'string' },
     note: { type: 'string' },
     help: { type: 'boolean' },
+    retry: { type: 'boolean' },
   },
 })
 const help = `On-Ramp source ingestion
   pnpm ingest setup [--batch random-20-2026-11-17|southeast-20-2026-11-17]
   pnpm ingest sources
+  pnpm ingest tag-pending [--retry]
   pnpm ingest terms --source KEY --note "What source terms you reviewed"
   pnpm ingest config --source KEY [--file config.json | --model provider/model]
   pnpm ingest run --all|--source KEY|--batch KEY [--mode deterministic|llm] [--limit N]
   pnpm ingest replay --run UUID [--mode deterministic|llm]
   pnpm ingest run-info --run UUID
   pnpm ingest proposals [--source KEY]
-  pnpm ingest review --type organization|offering|event --id UUID --decision approve|reject --expected ISO_TIMESTAMP --reviewer STAFF_UUID
+  pnpm ingest review --type organization|offering|event --id UUID --decision approve|reject --expected ISO_TIMESTAMP --reviewer STAFF_UUID [--tag-proposal UUID --tag-expected ISO_TIMESTAMP]
   pnpm ingest recover --run UUID
 
 Runs create pending_review proposals. Review never happens automatically.
@@ -82,6 +89,14 @@ else {
           ? await bootstrapIngestionBatch(db, values.batch)
           : await bootstrapIngestion(db)
       else if (command === 'sources') result = sourceList
+      else if (command === 'tag-pending')
+        result = await tagPendingIngestion(
+          db,
+          values.reviewer ?? localReviewerId,
+          ingestionTaggingModel(process.env),
+          undefined,
+          values.retry,
+        )
       else if (command === 'terms')
         result = await recordTermsReview(db, needSource().id, values.note ?? '')
       else if (command === 'config') {
@@ -180,6 +195,12 @@ else {
             id: values.id,
             decision: values.decision,
             expectedUpdatedAt: values.expected,
+            expectedTagProposal: values['tag-proposal']
+              ? {
+                  id: values['tag-proposal'],
+                  updatedAt: values['tag-expected'],
+                }
+              : undefined,
           },
           values.reviewer ?? process.env.INGEST_REVIEWER_ID ?? '',
         )

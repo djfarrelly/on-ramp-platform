@@ -11,6 +11,8 @@ import manifest from './batches/random-20-2026-11-17.json'
 import southeastManifest from './batches/southeast-20-2026-11-17.json'
 import remainingManifest from './batches/southeast-remaining-2026-11-17.json'
 import { sourceConfig } from './contracts'
+import { tagPendingIngestion } from '../tagging/ingestion'
+import { localReviewerId } from './bootstrap'
 
 export const randomBatchKey = 'random-20-2026-11-17'
 export const southeastBatchKey = 'southeast-20-2026-11-17'
@@ -142,7 +144,14 @@ export async function bootstrapIngestionBatch(db: Database, key: string) {
       }
     }
   })
+  const tagging = await tagPendingIngestion(
+    db,
+    localReviewerId,
+    undefined,
+    batch.profiles.map((p) => p.id),
+  )
   return {
+    tagging,
     batch: key,
     createdOrganizations,
     createdSources,

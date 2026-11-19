@@ -9,6 +9,7 @@ import {
   users,
 } from '../../db/schema'
 import { sourceConfig, type SourceConfig } from './contracts'
+import { tagPendingIngestion } from '../tagging/ingestion'
 
 const stableId = (n: number) =>
   `019a7e01-0000-7000-8000-${n.toString(16).padStart(12, '0')}`
@@ -487,7 +488,14 @@ export async function bootstrapIngestion(db: Database) {
         .onConflictDoNothing()
     }
   })
+  const tagging = await tagPendingIngestion(
+    db,
+    localReviewerId,
+    undefined,
+    profiles.map((_, i) => stableId(100 + i)),
+  )
   return {
+    tagging,
     reviewerId: localReviewerId,
     sources: initialSources.map((source, i) => ({
       id: stableId(300 + i),

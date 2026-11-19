@@ -1,6 +1,7 @@
 import { createPublicFetcher } from './fetch'
 import { createGatewayExtractor, type GatewaySettings } from './llm'
 import type { IngestionPorts } from '../../services/ingestion/contracts'
+import { ingestionTaggingModel } from '../tagging/ingestion-model'
 
 export type IngestionBindings = {
   INGEST_SNAPSHOTS?: { put: (key: string, value: string) => Promise<unknown> }
@@ -21,11 +22,21 @@ export type IngestionBindings = {
   CLOUDFLARE_AI_TOKEN?: string
   AI_GATEWAY_ID?: string
   AI_GATEWAY_SPEND_LIMIT_CONFIGURED?: string
+  OPENAI_API_KEY?: string
+  TAGGING_PROVIDER?: string
+  TAGGING_MODEL?: string
+  INGEST_TAGGING_MODE?: string
 }
 export function workerPorts(env: IngestionBindings): IngestionPorts {
   if (!env.INGEST_SNAPSHOTS)
     throw new Error('Configure the ingestion R2 snapshot binding')
   return {
+    tagging: ingestionTaggingModel({
+      ...env,
+      INGEST_SNAPSHOTS: undefined,
+      INGEST_SOURCE: undefined,
+    }),
+    taggingReviewerId: env.INGEST_REVIEWER_ID,
     fetchDocument: createPublicFetcher(),
     saveSnapshot: async (runId, path, value) => {
       const key = `${runId}/${path}`

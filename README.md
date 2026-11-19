@@ -225,8 +225,13 @@ incomplete until you supply a real development binding.
 See [architecture decisions](docs/architecture-decisions.md), the
 [ingestion runbook](docs/ingestion.md) and [discovery setup](docs/discovery.md).
 The [taxonomy and matching analysis](docs/taxonomy-analysis.md) audits the
-November 17 inventory and proposes 44 broad terms across six groups for review.
-Its draft vocabulary is not applied to database records or public search.
+November 17 inventory. The [tagging workflow](docs/tagging.md) now implements
+45 controlled terms across six groups, with separate AI and data topics.
+Run `pnpm tagging run --mode hybrid --limit 55` after configuring the model,
+or use `pnpm ingest tag-pending` to backfill ingestion tagging. Open `/review`
+to inspect and edit a tagged listing, then approve its content and tags together.
+Untagged or failed records stay in ingestion until tagging is ready. Model calls use the provider-neutral
+Vercel AI SDK; OpenAI credits can be used through Cloudflare BYOK.
 Next: review a small real inventory, configure AI Gateway and compare the same
 requests in AI-assisted and baseline modes before adding model-selected recommendations.
 

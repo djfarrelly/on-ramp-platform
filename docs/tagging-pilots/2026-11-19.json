@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-19",
+  "runId": "01a1f4e2-faaf-76e3-a2c8-8a7da8b9872c",
+  "taxonomyVersion": "1.0",
+  "promptVersion": "tagging-v2",
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "routing": "direct-local-user-authorized-one-time-pilot",
+  "records": 55,
+  "providers": 49,
+  "recordTypes": {
+    "offering": 33,
+    "event": 11,
+    "organization": 11
+  },
+  "suggestions": 262,
+  "groups": {
+    "goal": 87,
+    "support": 84,
+    "topic": 24,
+    "audience": 44,
+    "business-stage": 11,
+    "industry": 12
+  },
+  "basis": {
+    "model": 223,
+    "rule": 39
+  },
+  "reviewStates": {
+    "pending_review": 55
+  },
+  "generationFailures": 0,
+  "abstentions": [
+    {
+      "id": "019a7e02-0000-7000-8000-000000000070",
+      "name": "GST Michigan Works!",
+      "provider": "GST Michigan Works!"
+    },
+    {
+      "id": "01a1ea60-297d-75d7-9b1d-ecf993414782",
+      "name": "2027 Detroit Policy Conference",
+      "provider": "Detroit Regional Chamber"
+    }
+  ],
+  "flaggedRecords": [
+    {
+      "id": "01a1d168-39ac-70bb-8eee-3ac18cc44d22",
+      "name": "SPARK Lead",
+      "issues": ["Rule/model disagreement: topic-leadership-communication."]
+    },
+    {
+      "id": "01a1ea60-5616-71d3-8927-7afb4a2efa9d",
+      "name": "CAPITAL CONNECT | MBBA",
+      "issues": [
+        "Rule/model disagreement: topic-business-strategy.",
+        "Rule/model disagreement: topic-finance."
+      ]
+    },
+    {
+      "id": "01a1ea60-40de-727d-8610-d01263547877",
+      "name": "Entrepreneurship: Start-Up and Business Owner Management (Voucher Included)",
+      "issues": ["Rule/model disagreement: topic-finance."]
+    },
+    {
+      "id": "01a1ea43-d54e-730d-ae9f-1126f697c534",
+      "name": "Workforce Solutions Through BCI",
+      "issues": ["Rule/model disagreement: topic-leadership-communication."]
+    },
+    {
+      "id": "01a1ea60-24b7-7214-b024-7c6b4761bc71",
+      "name": "Customized Training",
+      "issues": ["Rule/model disagreement: audience-employers."]
+    }
+  ],
+  "sourceRecordsUnchanged": true,
+  "canonicalTagAssignmentsUnchanged": true,
+  "runHistory": {
+    "baseline": "01a1f4d8-2990-746b-a19c-b6d6ed4fef84",
+    "initial": "01a1f4dc-790c-710a-b6a9-0630938e22b3",
+    "evidenceRepair": "01a1f4e0-f117-70fb-b59b-0b3035bbe762",
+    "final": "01a1f4e2-faaf-76e3-a2c8-8a7da8b9872c"
+  },
+  "validation": {
+    "unitTests": 46,
+    "databaseTests": 44,
+    "browserTests": 28,
+    "typecheck": "passed",
+    "build": "passed"
+  }
+}

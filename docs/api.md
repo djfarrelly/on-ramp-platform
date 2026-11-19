@@ -96,13 +96,19 @@ curl http://127.0.0.1:5173/api/v1/discovery.respond \
 
 ## Ingestion administration
 
+Tagging has a separate local-only registry under `tagging.*`, using the same
+development/loopback/same-origin gate and staff audit identity. Its seven
+explicit methods generate bounded proposals, expose evidence and support
+individual tag edits/decisions. They never publish listings and are absent from
+public model tools. See [tagging methods and runbook](tagging.md#api-methods).
+
 The unauthenticated **local development** review UI has a separate registry:
 
-| Method                  | Input                                         | Result                                                                       |
-| ----------------------- | --------------------------------------------- | ---------------------------------------------------------------------------- |
-| `review.listProposals`  | `{}`                                          | Pending proposals, display facts, safe source links and publication blockers |
-| `review.decideProposal` | `type`, `id`, `decision`, `expectedUpdatedAt` | Decision status and published canonical path when approved                   |
-| `review.editProposal`   | `type`, `id`, `expectedUpdatedAt`, `changes`  | Saves validated content fields on a pending proposal; never publishes        |
+| Method                  | Input                                                                | Result                                                                       |
+| ----------------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `review.listProposals`  | `{}`                                                                 | Pending proposals, display facts, safe source links and publication blockers |
+| `review.decideProposal` | `type`, `id`, `decision`, `expectedUpdatedAt`, `expectedTagProposal` | Decision status and published canonical path when approved                   |
+| `review.editProposal`   | `type`, `id`, `expectedUpdatedAt`, `changes`                         | Saves validated content fields on a pending proposal; never publishes        |
 
 These methods return 404 in production builds or on non-loopback hosts. They
 require a matching `Origin` header and JSON request body, use the server-owned
@@ -120,22 +126,27 @@ the same field. Null clears a date. Local clock-change gaps or new ambiguous
 times return 400. Only the editing method allows a 64 KiB JSON body, to accommodate a
 16,000-character description in UTF-8; the other methods keep their 16 KiB limit.
 Saving keeps the listing pending and checks `expectedUpdatedAt` before writing.
+The review queue includes only records with current, non-empty usable tags and
+returns `awaitingTagging` for records still held in ingestion. Publication approves
+selected tags in the same transaction. When a tag proposal exists, approvals must
+send `expectedTagProposal: { id, updatedAt }` from the queue; stale/missing tag
+identity returns 409. The private `ingestion.reviewProposal` uses the same rule.
 
 The same named-method convention is used for private ingestion operations.
 These methods are **not** in the public tool registry and are disabled without
 explicit bootstrap staff configuration. See [the ingestion runbook](ingestion.md)
 for access, CLI equivalents, Workflow/R2 setup and review semantics.
 
-| Method                        | Input                                                  |
-| ----------------------------- | ------------------------------------------------------ |
-| `ingestion.listSources`       | `{}`                                                   |
-| `ingestion.configureSource`   | `{ sourceId, config }`                                 |
-| `ingestion.recordTermsReview` | `{ sourceId, note }`                                   |
-| `ingestion.runSource`         | `{ sourceId, mode?, limit? }`; dispatches a Workflow   |
-| `ingestion.getRun`            | `{ runId }`                                            |
-| `ingestion.recoverRun`        | `{ runId }`; only interrupted runs older than one hour |
-| `ingestion.listProposals`     | `{ sourceId? }`                                        |
-| `ingestion.reviewProposal`    | `{ type, id, decision, expectedUpdatedAt }`            |
+| Method                        | Input                                                             |
+| ----------------------------- | ----------------------------------------------------------------- |
+| `ingestion.listSources`       | `{}`                                                              |
+| `ingestion.configureSource`   | `{ sourceId, config }`                                            |
+| `ingestion.recordTermsReview` | `{ sourceId, note }`                                              |
+| `ingestion.runSource`         | `{ sourceId, mode?, limit? }`; dispatches a Workflow              |
+| `ingestion.getRun`            | `{ runId }`                                                       |
+| `ingestion.recoverRun`        | `{ runId }`; only interrupted runs older than one hour            |
+| `ingestion.listProposals`     | `{ sourceId? }`                                                   |
+| `ingestion.reviewProposal`    | `{ type, id, decision, expectedUpdatedAt, expectedTagProposal? }` |
 
 Review types are `organization`, `offering`, `event`; decisions are `approve`
 or `reject`. The authenticated bootstrap reviewer is selected by the server,

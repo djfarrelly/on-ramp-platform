@@ -3,13 +3,24 @@ import assert from 'node:assert/strict'
 import pg from 'pg'
 import { eq } from 'drizzle-orm'
 import { createDatabase, type Database } from '../../src/db/client'
-import { offerings, organizations, events } from '../../src/db/schema'
+import {
+  offerings,
+  organizations,
+  events,
+  offeringTags,
+  taggingProposals,
+  taggingSuggestions,
+} from '../../src/db/schema'
 import { localReviewerId } from '../../src/services/ingestion/bootstrap'
 import {
   listReviewQueue,
   decideReviewProposal,
   editReviewProposal,
 } from '../../src/services/review'
+import {
+  refreshTagsAfterContentEdit,
+  editTaggingProposal,
+} from '../../src/services/tagging'
 import { handleReviewRpc } from '../../src/server/review-rpc'
 import { reviewFixtureIds as ids, seedReviewFixtures } from '../fixtures/review'
 
@@ -41,6 +52,141 @@ const request = (input: unknown) =>
     body: JSON.stringify(input),
   })
 
+test('records with empty or failed tagging stay outside review and cannot bypass publication checks', () =>
+  isolated(async (tx) => {
+    const listing = (await listReviewQueue(tx, localReviewerId)).items.find(
+      (p) => p.id === ids.offering,
+    )!
+    await tx
+      .update(taggingSuggestions)
+      .set({ isSelected: false })
+      .where(eq(taggingSuggestions.proposalId, listing.tags.proposal!.id))
+    const queue = await listReviewQueue(tx, localReviewerId)
+    assert.equal(queue.awaitingTagging, 1)
+    assert.equal(
+      queue.items.some((p) => p.id === ids.offering),
+      false,
+    )
+    await assert.rejects(
+      decideReviewProposal(
+        tx,
+        {
+          type: listing.type,
+          id: listing.id,
+          expectedUpdatedAt: listing.updatedAt,
+          expectedTagProposal: listing.tags.proposal,
+          decision: 'approve',
+        },
+        localReviewerId,
+      ),
+      /awaiting ingestion tagging/,
+    )
+    await tx
+      .update(taggingSuggestions)
+      .set({ isSelected: true })
+      .where(eq(taggingSuggestions.proposalId, listing.tags.proposal!.id))
+    await tx
+      .update(taggingProposals)
+      .set({ errorCode: 'MODEL_OR_VALIDATION_FAILED' })
+      .where(eq(taggingProposals.id, listing.tags.proposal!.id))
+    assert.equal(
+      (await listReviewQueue(tx, localReviewerId)).items.some(
+        (p) => p.id === ids.offering,
+      ),
+      false,
+    )
+    assert.deepEqual(
+      await tx
+        .select()
+        .from(offeringTags)
+        .where(eq(offeringTags.offeringId, ids.offering)),
+      [],
+    )
+  }))
+
+test('concurrent tag edits invalidate the combined review even when listing content did not change', () =>
+  isolated(async (tx) => {
+    const parent = (await listReviewQueue(tx, localReviewerId)).items.find(
+      (p) => p.id === ids.organization,
+    )!
+    await editTaggingProposal(
+      tx,
+      {
+        proposalId: parent.tags.proposal!.id,
+        expectedUpdatedAt: parent.tags.proposal!.updatedAt,
+        assignments: [
+          {
+            slug: 'support-training',
+            field: 'summary',
+            quote: 'Test organization summary.',
+          },
+        ],
+        note: 'Changed by another reviewer',
+      },
+      localReviewerId,
+    )
+    await assert.rejects(
+      decideReviewProposal(
+        tx,
+        {
+          type: parent.type,
+          id: parent.id,
+          expectedUpdatedAt: parent.updatedAt,
+          expectedTagProposal: parent.tags.proposal,
+          decision: 'approve',
+        },
+        localReviewerId,
+      ),
+      /Tags changed/,
+    )
+    assert.equal(
+      (
+        await tx
+          .select()
+          .from(organizations)
+          .where(eq(organizations.id, parent.id))
+      )[0].status,
+      'pending_review',
+    )
+    assert.equal(
+      (
+        await tx
+          .select()
+          .from(taggingProposals)
+          .where(eq(taggingProposals.id, parent.tags.proposal!.id))
+      )[0].status,
+      'pending_review',
+    )
+  }))
+
+test('content edits retain supported tags and send records back to ingestion when all tag evidence is removed', () =>
+  isolated(async (tx) => {
+    const listing = (await listReviewQueue(tx, localReviewerId)).items.find(
+      (p) => p.id === ids.offering,
+    )!
+    await editReviewProposal(
+      tx,
+      {
+        type: listing.type,
+        id: listing.id,
+        expectedUpdatedAt: listing.updatedAt,
+        changes: { summary: 'New text without the previous evidence.' },
+      },
+      localReviewerId,
+    )
+    const queue = await listReviewQueue(tx, localReviewerId)
+    assert.equal(
+      queue.items.some((p) => p.id === listing.id),
+      false,
+    )
+    assert.equal(queue.awaitingTagging, 1)
+    assert.equal(
+      (await tx.select().from(offerings).where(eq(offerings.id, listing.id)))[0]
+        .summary,
+      'New text without the previous evidence.',
+    )
+  }))
+
 test('review queue exposes factual details, parent blockers and safe source links', () =>
   isolated(async (tx) => {
     const queue = await listReviewQueue(tx, localReviewerId)
@@ -58,6 +204,12 @@ test('review queue exposes factual details, parent blockers and safe source link
       .update(offerings)
       .set({ url: 'javascript:alert(1)' })
       .where(eq(offerings.id, ids.offering))
+    await refreshTagsAfterContentEdit(
+      tx,
+      'offering',
+      ids.offering,
+      localReviewerId,
+    )
     const unsafe = (await listReviewQueue(tx, localReviewerId)).items.find(
       (p) => p.id === ids.offering,
     )!
@@ -134,6 +286,7 @@ test('editing keeps proposals pending, preserves identity and provenance, and ap
         type: parent.type,
         id: parent.id,
         expectedUpdatedAt: updatedParent.updatedAt,
+        expectedTagProposal: updatedParent.tags.proposal,
         decision: 'approve',
       },
       localReviewerId,
@@ -147,6 +300,7 @@ test('editing keeps proposals pending, preserves identity and provenance, and ap
         type: updated.type,
         id: updated.id,
         expectedUpdatedAt: updated.updatedAt,
+        expectedTagProposal: updated.tags.proposal,
         decision: 'approve',
       },
       localReviewerId,
@@ -194,6 +348,7 @@ test('stale saves cannot overwrite changes and event edits validate the full dat
       async (run) => run(tx),
     )
     assert.equal(response.status, 409)
+    await refreshTagsAfterContentEdit(tx, 'event', ids.event, localReviewerId)
     const latest = (await listReviewQueue(tx, localReviewerId)).items.find(
       (p) => p.id === item.id,
     )!
@@ -240,6 +395,7 @@ test('local RPC approves the parent first, publishes a program and records the f
       id: p.id,
       decision: 'approve',
       expectedUpdatedAt: p.updatedAt,
+      expectedTagProposal: p.tags.proposal,
     })
     assert.equal(
       (
@@ -251,6 +407,22 @@ test('local RPC approves the parent first, publishes a program and records the f
         )
       ).status,
       409,
+    )
+    assert.equal(
+      (
+        await tx
+          .select()
+          .from(taggingProposals)
+          .where(eq(taggingProposals.id, program.tags.proposal!.id))
+      )[0].status,
+      'pending_review',
+    )
+    assert.deepEqual(
+      await tx
+        .select()
+        .from(offeringTags)
+        .where(eq(offeringTags.offeringId, program.id)),
+      [],
     )
     const parent = queue.items.find((p) => p.id === ids.organization)!
     const published = await handleReviewRpc(
@@ -300,6 +472,7 @@ test('stale and duplicate decisions fail; rejection removes a proposal without p
       async (run) => run(tx),
     )
     assert.equal(stale.status, 409)
+    await refreshTagsAfterContentEdit(tx, 'event', ids.event, localReviewerId)
     const latest = (await listReviewQueue(tx, localReviewerId)).items.find(
       (p) => p.id === ids.event,
     )!

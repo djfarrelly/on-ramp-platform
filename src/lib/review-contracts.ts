@@ -105,6 +105,11 @@ export const reviewDecisionInput = z
     id: z.uuid(),
     decision: z.enum(['approve', 'reject']),
     expectedUpdatedAt: z.iso.datetime(),
+    expectedTagProposal: z
+      .object({ id: z.uuid(), updatedAt: z.iso.datetime() })
+      .strict()
+      .nullable()
+      .optional(),
   })
   .strict()
 export const reviewInputs = {

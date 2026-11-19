@@ -304,3 +304,49 @@ Validate a per-type allowlist of content fields; edits stay `pending_review`,
 use the same timestamp checks and source-first lock order as decisions, and
 preserve slugs, source identities, hashes, snapshots and decision audit fields.
 Do not expose editing to public tools or enable it outside the local review gate.
+
+## Tagging pilot
+
+User-approved November 19, 2026: the tagging vocabulary is implemented as 45
+controlled terms, with separate Artificial intelligence and Data & analytics
+topics. Other proposed support-type trade-offs remain accepted. Definitions
+and explicit stable IDs are in `src/lib/tagging-vocabulary.json`; contracts in
+`src/lib/tagging-contracts.ts`; domain logic in `src/services/tagging/`.
+See `docs/tagging.md` for CLI, model configuration and review semantics.
+
+`pnpm tagging run --mode hybrid --limit 55` generates pending suggestions using
+Vercel AI SDK through provider-neutral service ports. No source fetching or
+listing publication occurs. Each tag requires an exact source-field quote.
+Rule/model disagreements and generation failures are exposed for review.
+Approval is individual and additive, preserves existing tag assignments and
+checks proposal timestamps plus listing/content/tag-set fingerprints.
+
+User-approved final flow: tagging is part of ingestion, before human review.
+`/review` is the only review page. Do not restore a separate tag-review page or
+require a second tag approval. Setup tags organization profiles with rules; source
+imports tag pending provider records through provider-neutral ports. Missing,
+failed, rejected, stale or empty tagging stays outside the review queue. Do not
+invent filler tags. `pnpm ingest tag-pending [--retry]` handles backfill/retries;
+ready proposals and editorial choices are preserved.
+
+The inline tag editor supports controlled-vocabulary search and grounded evidence.
+Approve & publish validates listing and tag proposal timestamps, approves selected
+tags and publishes the record atomically, retaining parent-first/source-first
+locking and canonical identity for revisions. Content edits create fresh audited
+snapshots retaining only still-grounded tags; removing all tags returns a record
+to ingestion. Keep navigation/publication paused while edits are open.
+
+`tagging.*` methods retain the development-only loopback/same-origin JSON gate and
+active staff audit identity. They are never public discovery tools. Remote staff
+review requires proper authentication. Ingestion uses rules without Gateway
+configuration, or the AI SDK model port through Gateway when configured. Explicit
+`INGEST_TAGGING_MODE=hybrid` fails closed on missing configuration/model failure;
+no rule fallback with a generation error is review-ready.
+
+Default OpenAI routing uses the user's key through Cloudflare BYOK and Gateway
+spend caps; `TAGGING_PROVIDER=cloudflare` uses the compatible AI SDK adapter.
+A one-time direct OpenAI pilot of 55 records was explicitly authorized on
+November 19. Its CLI-only `TAGGING_ALLOW_DIRECT_OPENAI=true` opt-in refuses
+non-loopback or non-`onramp` databases. Do not treat that one-time approval as
+permission for future direct runs or enable direct access for HTTP/production.
+Neither API keys nor model payloads belong in logs or committed configuration.

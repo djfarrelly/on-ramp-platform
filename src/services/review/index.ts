@@ -17,6 +17,8 @@ import {
 } from '../../lib/review-contracts'
 import { ReviewConflictError } from '../ingestion/review'
 import { formatLocalDateTime, localDateTimeToInstant } from '../../lib/datetime'
+import { listReviewTags } from './tags'
+import { refreshTagsAfterContentEdit } from '../tagging'
 
 const safeUrl = (value: string | null) => {
   try {
@@ -69,7 +71,8 @@ const path = (type: ReviewDecisionInput['type'], slug: string) =>
 export async function listReviewQueue(db: Database, reviewerId: string) {
   await assertStaff(db, reviewerId)
   const proposals = await listProposals(db)
-  if (!proposals.length) return { items: [] }
+  if (!proposals.length) return { items: [], awaitingTagging: 0 }
+  const tagSummaries = await listReviewTags(db, proposals)
   const organizationIds = [
     ...new Set(
       proposals.map((p) =>
@@ -137,7 +140,8 @@ export async function listReviewQueue(db: Database, reviewerId: string) {
             .where(inArray(sources.id, sourceIds))
         : [],
     ])
-  const items = proposals
+  const readyProposals = proposals.filter((p) => tagSummaries.get(p.id)!.ready)
+  const items = readyProposals
     .map((p) => {
       const parent = parents.find(
         (o) => o.id === (p.type === 'organization' ? p.id : p.organizationId),
@@ -161,7 +165,9 @@ export async function listReviewQueue(db: Database, reviewerId: string) {
       let blockedReason: string | null = null
       if (p.type !== 'organization' && parent.status !== 'published')
         blockedReason =
-          'Approve the organization profile before publishing this listing.'
+          tagSummaries.get(parent.id)?.ready === false
+            ? 'The organization profile is still awaiting ingestion tagging.'
+            : 'Approve the organization profile before publishing this listing.'
       if (p.type === 'organization') {
         fields.push(
           field(
@@ -318,9 +324,14 @@ export async function listReviewQueue(db: Database, reviewerId: string) {
         updatedAt: p.updatedAt.toISOString(),
         organizationId: parent.id,
         organizationName: parent.name,
-        parentProposalId: parent.status === 'pending_review' ? parent.id : null,
+        parentProposalId:
+          parent.status === 'pending_review' &&
+          tagSummaries.get(parent.id)?.ready
+            ? parent.id
+            : null,
         blockedReason,
         fields,
+        tags: tagSummaries.get(p.id)!,
         sourceName: source?.name ?? null,
         sourceUrl: safeUrl(source?.url ?? p.url),
         isUpdate: Boolean(publishedId),
@@ -336,7 +347,7 @@ export async function listReviewQueue(db: Database, reviewerId: string) {
         a.name.localeCompare(b.name) ||
         a.id.localeCompare(b.id),
     )
-  return { items }
+  return { items, awaitingTagging: proposals.length - readyProposals.length }
 }
 
 export async function editReviewProposal(
@@ -447,6 +458,7 @@ export async function editReviewProposal(
     }
     // The DB updates the timestamp and search vector. Keep ingestion hashes and
     // provenance intact: unchanged source evidence must not undo staff corrections.
+    await refreshTagsAfterContentEdit(tx, args.type, args.id, reviewerId)
     return { id: args.id, status: 'pending_review' as const }
   })
 }

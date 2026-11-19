@@ -3,6 +3,20 @@
 Source defaults register real organizations from `Entities` in
 `context/mi-ecosystem-data.xlsx`, then import bounded samples of their public
 events or programs. Imports create `pending_review` records; they never publish.
+Tagging is now part of this pass: source proposals and organization profiles must
+have current, non-empty usable tags before appearing on `/review`. Missing tags,
+model failures and abstentions stay in ingestion. Human review approves the
+listing and tags together with one **Approve & publish** action.
+
+`pnpm ingest tag-pending` backfills pending records without changing ready ones;
+add `--retry` to regenerate held failures/abstentions. It uses rules when Gateway
+is unconfigured; `INGEST_TAGGING_MODE=hybrid` requires the configured Gateway model,
+and `deterministic` explicitly selects rules. See [tagging](tagging.md).
+
+The local `/review` UI supplies listing and tag-proposal review timestamps together.
+For a CLI approval, also pass `--tag-proposal UUID --tag-expected ISO_TIMESTAMP`
+from the inspected latest tag proposal. Missing or stale tag identity blocks
+publication. CLI rejection may still be used to discard an untagged import.
 
 | Source key                     | Organization / workbook row               | Default extraction                                                         | Sample cap          |
 | ------------------------------ | ----------------------------------------- | -------------------------------------------------------------------------- | ------------------- |
@@ -349,14 +363,14 @@ Example DOM portion:
 
 ```json
 {
-    "scope": "body",
-    "fields": {
-        "name": { "selector": "h1", "required": true },
-        "description": {
-            "selector": "main .field--name-body > p:nth-of-type(-n+4)",
-            "required": true
-        }
+  "scope": "body",
+  "fields": {
+    "name": { "selector": "h1", "required": true },
+    "description": {
+      "selector": "main .field--name-body > p:nth-of-type(-n+4)",
+      "required": true
     }
+  }
 }
 ```
 

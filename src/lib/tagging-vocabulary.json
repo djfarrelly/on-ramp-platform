@@ -14,78 +14,64 @@
           "slug": "goal-find-work",
           "label": "Find a job",
           "definition": "Help with finding work, applications, interviewing or employer connections.",
-          "searchPhrases": [
-            "find work",
-            "job search"
-          ]
+          "searchPhrases": ["find work", "job search"],
+          "id": "019a8000-0000-7000-8000-000000000001"
         },
         {
           "slug": "goal-change-careers",
           "label": "Change careers",
           "definition": "Help exploring or moving into a different occupation or field.",
-          "searchPhrases": [
-            "career change",
-            "career pivot"
-          ]
+          "searchPhrases": ["career change", "career pivot"],
+          "id": "019a8000-0000-7000-8000-000000000002"
         },
         {
           "slug": "goal-return-to-work",
           "label": "Return to work",
           "definition": "Support explicitly addressing re-entry after time away from paid work. General unemployment does not establish this specialization.",
-          "searchPhrases": [
-            "career re-entry",
-            "return to the workforce"
-          ]
+          "searchPhrases": ["career re-entry", "return to the workforce"],
+          "id": "019a8000-0000-7000-8000-000000000003"
         },
         {
           "slug": "goal-advance-leadership",
           "label": "Advance into leadership",
           "definition": "Develop leadership or management capability. Does not assert executive eligibility.",
-          "searchPhrases": [
-            "leadership development"
-          ]
+          "searchPhrases": ["leadership development"],
+          "id": "019a8000-0000-7000-8000-000000000004"
         },
         {
           "slug": "goal-build-skills",
           "label": "Build skills or earn a credential",
           "definition": "Learn a skill or prepare for a documented credential. The tag does not promise credential issuance.",
-          "searchPhrases": [
-            "upskill",
-            "reskill"
-          ]
+          "searchPhrases": ["upskill", "reskill"],
+          "id": "019a8000-0000-7000-8000-000000000005"
         },
         {
           "slug": "goal-start-business",
           "label": "Explore or start a business",
           "definition": "Explore an idea, validate a market or launch a business.",
-          "searchPhrases": [
-            "start a business",
-            "business startup"
-          ]
+          "searchPhrases": ["start a business", "business startup"],
+          "id": "019a8000-0000-7000-8000-000000000006"
         },
         {
           "slug": "goal-grow-business",
           "label": "Grow a business",
           "definition": "Improve or expand an operating business.",
-          "searchPhrases": [
-            "business growth"
-          ]
+          "searchPhrases": ["business growth"],
+          "id": "019a8000-0000-7000-8000-000000000007"
         },
         {
           "slug": "goal-business-funding",
           "label": "Find business funding",
           "definition": "Access or prepare for business capital. Availability and eligibility require separate evidence.",
-          "searchPhrases": [
-            "business financing"
-          ]
+          "searchPhrases": ["business financing"],
+          "id": "019a8000-0000-7000-8000-000000000008"
         },
         {
           "slug": "goal-professional-connections",
           "label": "Build professional connections",
           "definition": "Meet peers, mentors, employers or business collaborators.",
-          "searchPhrases": [
-            "professional networking"
-          ]
+          "searchPhrases": ["professional networking"],
+          "id": "019a8000-0000-7000-8000-000000000009"
         }
       ]
     },
@@ -98,73 +84,57 @@
           "slug": "support-training",
           "label": "Training & education",
           "definition": "Structured teaching, workshops, courses or guided learning. A workshop may also be an event.",
-          "searchPhrases": [
-            "course",
-            "class",
-            "workshop"
-          ]
+          "searchPhrases": ["course", "class", "workshop"],
+          "id": "019a8000-0000-7000-8000-00000000000a"
         },
         {
           "slug": "support-coaching",
           "label": "Coaching & advice",
           "definition": "Personalized mentoring, advising, consulting or feedback.",
-          "searchPhrases": [
-            "mentoring",
-            "consulting"
-          ]
+          "searchPhrases": ["mentoring", "consulting"],
+          "id": "019a8000-0000-7000-8000-00000000000b"
         },
         {
           "slug": "support-job-search",
           "label": "Job search & employer connections",
           "definition": "Application support, interview preparation, recruitment events or links to employer opportunities. Not a promise of placement.",
-          "searchPhrases": [
-            "resume help",
-            "interview preparation"
-          ]
+          "searchPhrases": ["resume help", "interview preparation"],
+          "id": "019a8000-0000-7000-8000-00000000000c"
         },
         {
           "slug": "support-community",
           "label": "Networking & community",
           "definition": "Peer connections, meetups or ongoing professional communities.",
-          "searchPhrases": [
-            "meetup",
-            "peer community"
-          ]
+          "searchPhrases": ["meetup", "peer community"],
+          "id": "019a8000-0000-7000-8000-00000000000d"
         },
         {
           "slug": "support-incubation",
           "label": "Incubation & acceleration",
           "definition": "A source-described incubator, accelerator or equivalent structured venture-development program.",
-          "searchPhrases": [
-            "incubator",
-            "accelerator"
-          ]
+          "searchPhrases": ["incubator", "accelerator"],
+          "id": "019a8000-0000-7000-8000-00000000000e"
         },
         {
           "slug": "support-financial-assistance",
           "label": "Funding & financial assistance",
           "definition": "Grants, lending, investment access, tuition support or preparation for these. Record the exact funding mechanism separately.",
-          "searchPhrases": [
-            "tuition assistance",
-            "grant support"
-          ]
+          "searchPhrases": ["tuition assistance", "grant support"],
+          "id": "019a8000-0000-7000-8000-00000000000f"
         },
         {
           "slug": "support-workspace",
           "label": "Workspace & prototyping",
           "definition": "Access to physical workspaces, labs, equipment or prototyping services.",
-          "searchPhrases": [
-            "coworking",
-            "prototyping lab"
-          ]
+          "searchPhrases": ["coworking", "prototyping lab"],
+          "id": "019a8000-0000-7000-8000-000000000010"
         },
         {
           "slug": "support-resources",
           "label": "Resources & tools",
           "definition": "Directories, guides, portals or tools that help a person navigate options.",
-          "searchPhrases": [
-            "resource directory"
-          ]
+          "searchPhrases": ["resource directory"],
+          "id": "019a8000-0000-7000-8000-000000000011"
         }
       ]
     },
@@ -182,7 +152,8 @@
             "generative AI",
             "machine learning",
             "AI"
-          ]
+          ],
+          "id": "019a8000-0000-7000-8000-000000000012"
         },
         {
           "slug": "topic-data",
@@ -194,7 +165,8 @@
             "data science",
             "business intelligence",
             "data engineering"
-          ]
+          ],
+          "id": "019a8000-0000-7000-8000-000000000013"
         },
         {
           "slug": "topic-software-it",
@@ -204,79 +176,64 @@
             "information technology",
             "cybersecurity",
             "computer support"
-          ]
+          ],
+          "id": "019a8000-0000-7000-8000-000000000014"
         },
         {
           "slug": "topic-digital-workplace",
           "label": "Digital workplace skills",
           "definition": "Basic computing, office applications and practical digital literacy.",
-          "searchPhrases": [
-            "computer literacy",
-            "office software"
-          ]
+          "searchPhrases": ["computer literacy", "office software"],
+          "id": "019a8000-0000-7000-8000-000000000015"
         },
         {
           "slug": "topic-leadership-communication",
           "label": "Leadership & communication",
           "definition": "Managing people, collaboration, workplace communication and leadership practice.",
-          "searchPhrases": [
-            "team leadership",
-            "workplace communication"
-          ]
+          "searchPhrases": ["team leadership", "workplace communication"],
+          "id": "019a8000-0000-7000-8000-000000000016"
         },
         {
           "slug": "topic-project-process",
           "label": "Project & process management",
           "definition": "Planning and managing projects, programs, delivery or operational improvement. Preserve exact methods in text.",
-          "searchPhrases": [
-            "project management",
-            "agile delivery"
-          ]
+          "searchPhrases": ["project management", "agile delivery"],
+          "id": "019a8000-0000-7000-8000-000000000017"
         },
         {
           "slug": "topic-business-strategy",
           "label": "Business planning & strategy",
           "definition": "Business models, customer discovery, business plans and operating strategy.",
-          "searchPhrases": [
-            "business planning",
-            "customer discovery"
-          ]
+          "searchPhrases": ["business planning", "customer discovery"],
+          "id": "019a8000-0000-7000-8000-000000000018"
         },
         {
           "slug": "topic-marketing-sales",
           "label": "Marketing & sales",
           "definition": "Finding, engaging and retaining customers, brand strategy and sales.",
-          "searchPhrases": [
-            "sales strategy",
-            "marketing strategy"
-          ]
+          "searchPhrases": ["sales strategy", "marketing strategy"],
+          "id": "019a8000-0000-7000-8000-000000000019"
         },
         {
           "slug": "topic-finance",
           "label": "Finance & financial literacy",
           "definition": "Accounting, budgeting, financial planning and capital readiness. Distinguish personal and business contexts in text.",
-          "searchPhrases": [
-            "accounting",
-            "financial planning"
-          ]
+          "searchPhrases": ["accounting", "financial planning"],
+          "id": "019a8000-0000-7000-8000-00000000001a"
         },
         {
           "slug": "topic-product-commercialization",
           "label": "Product design & commercialization",
           "definition": "Designing, testing, prototyping or bringing products and research to market.",
-          "searchPhrases": [
-            "product development",
-            "commercialization"
-          ]
+          "searchPhrases": ["product development", "commercialization"],
+          "id": "019a8000-0000-7000-8000-00000000001b"
         },
         {
           "slug": "topic-occupational-skills",
           "label": "Technical & occupational skills",
           "definition": "Practical occupational training, including equipment, manufacturing, trades and care-related technical competencies. Use industry and specific source text for narrower meaning.",
-          "searchPhrases": [
-            "vocational training",
-            "technical training"
-          ]
+          "searchPhrases": ["vocational training", "technical training"],
+          "id": "019a8000-0000-7000-8000-00000000001c"
         }
       ]
     },
@@ -289,49 +246,57 @@
           "slug": "industry-manufacturing",
           "label": "Manufacturing & hardware",
           "definition": "An explicit manufacturing, materials or physical-product industry focus.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-00000000001d"
         },
         {
           "slug": "industry-mobility",
           "label": "Mobility & transportation",
           "definition": "An explicit automotive, mobility, transport or logistics focus.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-00000000001e"
         },
         {
           "slug": "industry-energy",
           "label": "Energy & environment",
           "definition": "An explicit energy, clean technology or environmental industry focus.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-00000000001f"
         },
         {
           "slug": "industry-health",
           "label": "Healthcare & life sciences",
           "definition": "An explicit healthcare, care-delivery, medical or life-sciences focus.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-000000000020"
         },
         {
           "slug": "industry-digital",
           "label": "Software & digital technology",
           "definition": "An explicit software, IT or digital-technology industry focus. Using software alone is insufficient.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-000000000021"
         },
         {
           "slug": "industry-education",
           "label": "Education",
           "definition": "Serving education organizations or education-sector work. Being a college provider alone is insufficient.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-000000000022"
         },
         {
           "slug": "industry-public-service",
           "label": "Government & public service",
           "definition": "Serving public-sector careers or public-sector organizations. Public sponsorship alone is insufficient.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-000000000023"
         },
         {
           "slug": "industry-local-services",
           "label": "Retail, food & local services",
           "definition": "An explicit local-commerce, retail, food, hospitality or neighborhood-service focus. City location alone is insufficient.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-000000000024"
         }
       ]
     },
@@ -344,31 +309,36 @@
           "slug": "audience-individuals",
           "label": "Individuals & professionals",
           "definition": "An individual can seek this opportunity directly; verify any additional requirements.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-000000000025"
         },
         {
           "slug": "audience-founders",
           "label": "Founders & aspiring entrepreneurs",
           "definition": "People exploring or building a new venture.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-000000000026"
         },
         {
           "slug": "audience-owners",
           "label": "Business owners & operators",
           "definition": "People responsible for an operating business.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-000000000027"
         },
         {
           "slug": "audience-employers",
           "label": "Employers & teams",
           "definition": "Services procured or arranged by organizations for employees or teams.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-000000000028"
         },
         {
           "slug": "audience-students",
           "label": "Students & enrolled learners",
           "definition": "A source explicitly addresses enrolled students or degree-seeking learners. Separate suitability from an enrollment requirement.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-000000000029"
         }
       ]
     },
@@ -381,34 +351,35 @@
           "slug": "business-stage-idea",
           "label": "Exploring an idea",
           "definition": "Idea exploration before a defined venture or validated business model.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-00000000002a"
         },
         {
           "slug": "business-stage-starting",
           "label": "Starting & validating",
           "definition": "Developing a business model, product or initial market validation.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-00000000002b"
         },
         {
           "slug": "business-stage-operating",
           "label": "Operating & growing",
           "definition": "An operating business improving its operations, customer base or viability.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-00000000002c"
         },
         {
           "slug": "business-stage-scaling",
           "label": "Scaling & expanding",
           "definition": "A source explicitly targets expansion, second-stage businesses or scaling.",
-          "searchPhrases": []
+          "searchPhrases": [],
+          "id": "019a8000-0000-7000-8000-00000000002d"
         }
       ]
     }
   ],
   "assignmentPolicy": {
-    "typicalTagsPerListing": [
-      4,
-      6
-    ],
+    "typicalTagsPerListing": [4, 6],
     "initialMaximumTagsPerListing": 8,
     "allGroupsRequired": false,
     "noParentToChildInheritance": true,

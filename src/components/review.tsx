@@ -9,6 +9,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Empty, EmptyHeader } from '@/components/ui/empty'
 import { Separator } from '@/components/ui/separator'
 import { Pencil } from 'lucide-react'
+import { ReviewTags } from './review-tags'
 import { useEffect, useRef, useState } from 'react'
 import type { ReviewDecisionInput } from '../lib/review-contracts'
 import type {
@@ -62,12 +63,16 @@ async function reviewRpc<T>(
 }
 
 export function Review() {
-  const [queue, setQueue] = useState<ReviewQueue>({ items: [] })
+  const [queue, setQueue] = useState<ReviewQueue>({
+    items: [],
+    awaitingTagging: 0,
+  })
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [type, setType] = useState('all')
   const [organizationId, setOrganizationId] = useState('all')
   const [loading, setLoading] = useState(true)
   const [busy, setBusy] = useState(false)
+  const [tagEditing, setTagEditing] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [needsRefresh, setNeedsRefresh] = useState(false)
   const [editing, setEditing] = useState<
@@ -145,7 +150,7 @@ export function Review() {
     item: ReviewQueueItem,
     decision: ReviewDecisionInput['decision'],
   ) {
-    if (busy || loading || needsRefresh || editing) return
+    if (busy || loading || needsRefresh || editing || tagEditing) return
     const controller = new AbortController()
     currentRequest.current = controller
     const timeout = setTimeout(() => controller.abort(), 15000)
@@ -162,6 +167,7 @@ export function Review() {
           id: item.id,
           decision,
           expectedUpdatedAt: item.updatedAt,
+          expectedTagProposal: item.tags.proposal,
         },
         controller.signal,
       )
@@ -316,7 +322,7 @@ export function Review() {
     setOrganizationId(item.organizationId)
     setSelectedId(item.parentProposalId)
   }
-  const disabled = loading || busy || Boolean(editing)
+  const disabled = loading || busy || Boolean(editing) || tagEditing
 
   return (
     <section className="container review-page">
@@ -325,8 +331,8 @@ export function Review() {
           <p className="eyebrow">Local review · No sign-in</p>
           <h1>Review proposals.</h1>
           <p>
-            Compare each proposal with its source. Approval publishes it to the
-            directory.
+            Review each listing and its tags together. Approval publishes both
+            to the directory.
           </p>
         </div>
         <Button
@@ -339,6 +345,14 @@ export function Review() {
         </Button>
       </div>
       <div className="review-announcements">
+        {queue.awaitingTagging > 0 && (
+          <p>
+            {queue.awaitingTagging}{' '}
+            {queue.awaitingTagging === 1 ? 'record is' : 'records are'} still
+            awaiting tagging in ingestion. They’ll appear here when tags are
+            ready.
+          </p>
+        )}
         <p role="status">
           {busy
             ? editing
@@ -419,7 +433,8 @@ export function Review() {
           <EmptyHeader>
             <h2>All caught up.</h2>
             <p>
-              No proposals are awaiting review. Future imports will appear here.
+              No tagged records are awaiting review. Imports appear here after
+              tagging is complete.
             </p>
           </EmptyHeader>
         </Empty>
@@ -509,6 +524,13 @@ export function Review() {
                   Imported from {selected.sourceName}
                 </p>
               )}
+              <ReviewTags
+                key={selected.id}
+                item={selected}
+                disabled={loading || busy || Boolean(editing) || needsRefresh}
+                onEditingChange={setTagEditing}
+                onRefresh={() => void refresh()}
+              />
               <dl className="review-fields">
                 {selected.fields.map((field) => (
                   <div key={field.label}>

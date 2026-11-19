@@ -181,3 +181,36 @@ new Next.js scaffold. This existing project keeps TanStack Start, Cloudflare and
 its current routes and workflows. Future preset refreshes use
 `pnpm exec shadcn apply b2NMmadS1I --yes`; review generated imports and preserve
 page composition, semantic headings, GET forms and reduced-motion behavior.
+
+## Tagging pilot and review — November 19, 2026
+
+The first classification vocabulary has 45 explicit, stable tag identities in
+six groups. AI and data are separate topics; other broad support-type trade-offs
+remain accepted by the user. Runtime definitions and Zod contracts are shared,
+while classification, sample selection, evidence checks and decisions live in
+`src/services/tagging/`. The AI SDK and provider adapters live in `src/server/`.
+No model receives database access or a mutation tool.
+
+Three additive tables record tagging runs, proposals and normalized suggestions.
+Proposals have explicit nullable organization/offering/event foreign keys with a
+one-entity check. Canonical assignments still use the original three tag joins.
+Approval is additive and individual, preserves existing tags, checks listing and
+tag-set fingerprints, and is invoked atomically with listing publication by the unified review flow.
+Content edits retain only grounded selections in a fresh audited snapshot. Source configurations and existing editorial decisions are not
+changed by classification.
+
+The final user-approved flow puts tagging before human review in ingestion.
+`/review` shows only records with current non-empty usable tags; a single decision
+approves content/tags and publishes, with both timestamps checked. There is no
+separate tag-review page. Low-level `tagging.*` methods remain development/loopback
+only with same-origin JSON and an active staff identity. Production returns 404.
+This exception does not grant remote staff access or add public discovery tools.
+
+Vercel AI SDK is an OSS dependency, not a new hosted service. Its OpenAI adapter
+uses the user's own credits through Cloudflare BYOK by default; Cloudflare-hosted
+models use the compatible adapter. Business services consume provider-neutral
+ports. On November 19 the user explicitly authorized one direct OpenAI pilot of
+55 records because Gateway administration was unavailable. The CLI-only opt-in
+requires the local `onramp` database, is recorded in the model identity and was
+not enabled for HTTP or production. Gateway routing and Gateway spend caps
+remain the default for subsequent model work.

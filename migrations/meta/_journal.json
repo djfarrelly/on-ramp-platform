@@ -22,6 +22,20 @@
       "when": 1794514147383,
       "tag": "0002_low_misty_knight",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1795108583826,
+      "tag": "0003_tagging",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1795108837975,
+      "tag": "0004_tagging_timestamps",
+      "breakpoints": true
     }
   ]
 }

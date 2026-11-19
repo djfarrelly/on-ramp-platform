@@ -3,6 +3,8 @@ import assert from 'node:assert/strict'
 import pg from 'pg'
 import { and, eq, sql } from 'drizzle-orm'
 import { createDatabase, type Database } from '../../src/db/client'
+import { runTaggingBatch } from '../../src/services/tagging'
+import { listRecordTagState } from '../../src/services/tagging/readiness'
 import { getEvent, DirectoryNotFoundError } from '../../src/services/directory'
 import { camwEventPage, ingestionPages } from '../fixtures/ingestion-pages'
 import {
@@ -11,6 +13,9 @@ import {
   events,
   sources,
   sourceRuns,
+  offeringTags,
+  eventTags,
+  tags,
 } from '../../src/db/schema'
 import {
   bootstrapIngestion,
@@ -44,6 +49,8 @@ import {
   remainingBatchProfiles,
   remainingBatchSources,
 } from '../../src/services/ingestion/batches'
+import { listReviewQueue } from '../../src/services/review'
+import { tagPendingIngestion } from '../../src/services/tagging/ingestion'
 
 const connectionString = process.env.TEST_DATABASE_URL
 if (!connectionString || !new URL(connectionString).pathname.endsWith('_test'))
@@ -72,6 +79,58 @@ async function isolated(
   }
 }
 const programUrl = 'https://www.grcc.edu/program/technical-training'
+test('ingestion tags records before review, holds model failures and can retry unchanged listings', () =>
+  isolated(async (tx, ids) => {
+    const sourceId = ids[2].id
+    await programConfig(tx, sourceId)
+    const ports = portsFor('This workshop teaches data analytics.')
+    ports.tagging = {
+      model: 'ingestion-fixture',
+      classify: async () => {
+        throw new Error('Fixture model failure')
+      },
+    }
+    const run = await runSource(tx, { sourceId }, ports)
+    assert.equal(run.status, 'success')
+    const [listing] = await tx
+      .select()
+      .from(offerings)
+      .where(eq(offerings.sourceId, sourceId))
+    assert.equal(
+      (await listReviewQueue(tx, localReviewerId)).items.some(
+        (p) => p.id === listing.id,
+      ),
+      false,
+    )
+    assert.equal(
+      (run.diagnostics as { tagging: { waiting: number } }).tagging.waiting > 0,
+      true,
+    )
+    await tagPendingIngestion(
+      tx,
+      localReviewerId,
+      { model: null },
+      [listing.id],
+      true,
+    )
+    const ready = (await listReviewQueue(tx, localReviewerId)).items.find(
+      (p) => p.id === listing.id,
+    )!
+    assert.ok(ready.tags.suggested.some((t) => t.slug === 'topic-data'))
+    assert.equal(ready.tags.ready, true)
+    assert.equal(
+      (await tx.select().from(offerings).where(eq(offerings.id, listing.id)))[0]
+        .status,
+      'pending_review',
+    )
+    assert.deepEqual(
+      await tx
+        .select()
+        .from(offeringTags)
+        .where(eq(offeringTags.offeringId, listing.id)),
+      [],
+    )
+  }))
 test('remaining Southeast setup is isolated and preserves existing source holds and organization edits', () =>
   isolated(async (tx) => {
     await bootstrapIngestionBatch(tx, randomBatchKey)
@@ -249,6 +308,28 @@ async function approve(
         ? offerings
         : events
   const [row] = await tx.select().from(table).where(eq(table.id, id))
+  let state = (
+    await listRecordTagState(tx, [{ type, id, updatedAt: row.updatedAt }])
+  ).get(id)!
+  if (!state.ready) {
+    await runTaggingBatch(
+      tx,
+      { mode: 'hybrid', recordIds: [id] },
+      {
+        model: 'approval-fixture',
+        classify: async (r) => ({
+          assignments: [
+            { slug: 'support-training', field: 'name', quote: r.fields.name },
+          ],
+          usage: { inputTokens: 0, outputTokens: 0 },
+        }),
+      },
+      localReviewerId,
+    )
+    state = (
+      await listRecordTagState(tx, [{ type, id, updatedAt: row.updatedAt }])
+    ).get(id)!
+  }
   return reviewProposal(
     tx,
     {
@@ -256,6 +337,7 @@ async function approve(
       id,
       decision: 'approve',
       expectedUpdatedAt: row.updatedAt.toISOString(),
+      expectedTagProposal: state.proposal,
     },
     localReviewerId,
   )
@@ -421,7 +503,7 @@ test('published changes wait for review, then retain the canonical ID and slug',
     const run = await runSource(
       tx,
       { sourceId },
-      portsFor('Updated description.'),
+      portsFor('Updated description with data analytics.'),
     )
     assert.equal(run.itemsProposed, 1)
     const [unchangedPublic] = await tx
@@ -438,11 +520,14 @@ test('published changes wait for review, then retain the canonical ID and slug',
           eq(offerings.status, 'pending_review'),
         ),
       )
-    assert.equal(pending.description, 'Updated description.')
+    assert.equal(
+      pending.description,
+      'Updated description with data analytics.',
+    )
     const repeated = await runSource(
       tx,
       { sourceId },
-      portsFor('Updated description.'),
+      portsFor('Updated description with data analytics.'),
     )
     assert.equal(repeated.itemsUnchanged, 1)
     const reviewed = await approve(tx, 'offering', pending.id)
@@ -452,7 +537,19 @@ test('published changes wait for review, then retain the canonical ID and slug',
       .from(offerings)
       .where(eq(offerings.id, original.id))
     assert.equal(published.slug, original.slug)
-    assert.equal(published.description, 'Updated description.')
+    assert.equal(
+      published.description,
+      'Updated description with data analytics.',
+    )
+    assert.ok(
+      (
+        await tx
+          .select({ slug: tags.slug })
+          .from(offeringTags)
+          .innerJoin(tags, eq(tags.id, offeringTags.tagId))
+          .where(eq(offeringTags.offeringId, original.id))
+      ).some((t) => t.slug === 'topic-data'),
+    )
     assert.equal(published.reviewedBy, localReviewerId)
     assert.equal(
       (await tx.select().from(offerings).where(eq(offerings.id, pending.id)))[0]

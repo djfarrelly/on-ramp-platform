@@ -2,6 +2,9 @@ import { and, eq, inArray, isNull, or, sql } from 'drizzle-orm'
 import { createHash } from 'node:crypto'
 import { v7 as uuid } from 'uuid'
 import type { Database } from '../../db/client'
+import { tagPendingIngestion } from '../tagging/ingestion'
+import { listTaggingCandidates } from '../tagging'
+import { localReviewerId } from './bootstrap'
 import {
   sources,
   sourceRuns,
@@ -446,6 +449,17 @@ export async function runSource(
         proposed++
       else unchanged++
     }
+    const providerRecords = (await listTaggingCandidates(db)).filter(
+      (r) =>
+        r.organizationId === source.organizationId &&
+        r.listingStatus === 'pending_review',
+    )
+    const tagging = await tagPendingIngestion(
+      db,
+      ports.taggingReviewerId ?? localReviewerId,
+      ports.tagging,
+      providerRecords.map((r) => r.id),
+    )
     await db
       .update(sourceRuns)
       .set({
@@ -455,6 +469,7 @@ export async function runSource(
         itemsProposed: proposed,
         itemsUnchanged: unchanged,
         diagnostics: {
+          tagging,
           modelUsage,
           sampleLimited: true,
           disappearanceDetection: 'disabled-for-sample',

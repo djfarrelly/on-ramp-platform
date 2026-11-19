@@ -183,6 +183,8 @@ export type Document = {
   fetchedAt: string
 }
 export type IngestionPorts = {
+  tagging?: import('../../lib/tagging-contracts').TaggingPorts
+  taggingReviewerId?: string
   asOf?: Date
   fetchDocument: (url: string, allowedHosts: string[]) => Promise<Document>
   saveSnapshot: (runId: string, path: string, value: unknown) => Promise<string>

@@ -17,6 +17,7 @@ const result = spawnSync(
     'tests/integration/discovery.test.ts',
     'tests/integration/seed.test.ts',
     'tests/integration/review.test.ts',
+    'tests/integration/tagging.test.ts',
   ],
   { stdio: 'inherit', env: { ...process.env, TEST_DATABASE_URL: url } },
 )

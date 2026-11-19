@@ -42,6 +42,12 @@ async function isolated(run: (tx: Database) => Promise<void>) {
 test('demo cleanup preserves real imports, shared taxonomy and all four core lanes', () =>
   isolated(async (tx) => {
     const imported = await bootstrapIngestion(tx)
+    const importedTagIds = (await tx.select().from(tags))
+      .map((t) => t.id)
+      .filter(
+        (id) =>
+          !Array.from({ length: 9 }, (_, i) => fixtureId(100 + i)).includes(id),
+      )
     const sourceRows = await tx.select().from(sources)
     const organizationIds = sourceRows
       .map((s) => s.organizationId!)
@@ -53,30 +59,26 @@ test('demo cleanup preserves real imports, shared taxonomy and all four core lan
     const coreLanes = await tx.select().from(lanes)
     const now = new Date()
     const realId = '019a7e03-0000-7000-8000-000000000001'
-    await tx
-      .insert(offerings)
-      .values({
-        id: realId,
-        organizationId: organizationIds[0],
-        sourceId: imported.sources[0].id,
-        kind: 'program',
-        slug: 'real-import',
-        name: 'Real imported program',
-        status: 'pending_review',
-        createdAt: now,
-        updatedAt: now,
-      })
-    await tx
-      .insert(events)
-      .values({
-        id: realId,
-        organizationId: organizationIds[0],
-        slug: 'real-event',
-        name: 'Real event',
-        status: 'pending_review',
-        createdAt: now,
-        updatedAt: now,
-      })
+    await tx.insert(offerings).values({
+      id: realId,
+      organizationId: organizationIds[0],
+      sourceId: imported.sources[0].id,
+      kind: 'program',
+      slug: 'real-import',
+      name: 'Real imported program',
+      status: 'pending_review',
+      createdAt: now,
+      updatedAt: now,
+    })
+    await tx.insert(events).values({
+      id: realId,
+      organizationId: organizationIds[0],
+      slug: 'real-event',
+      name: 'Real event',
+      status: 'pending_review',
+      createdAt: now,
+      updatedAt: now,
+    })
     const realProgram = await tx
       .select()
       .from(offerings)
@@ -111,8 +113,10 @@ test('demo cleanup preserves real imports, shared taxonomy and all four core lan
       await tx.select().from(events).where(eq(events.id, realId)),
       realEvent,
     )
-    assert.equal((await tx.select().from(tags)).length, 1)
-    assert.equal((await tx.select().from(tags))[0].id, fixtureId(100))
+    assert.deepEqual(
+      (await tx.select().from(tags)).map((t) => t.id).sort(),
+      [...importedTagIds, fixtureId(100)].sort(),
+    )
     const setup = await getDiscoverySetup(tx)
     assert.equal(setup.initialDataset, 'published')
     assert.equal(setup.hasDemoOrganizations, false)
@@ -157,17 +161,15 @@ test('normal seeding never repopulates demos; explicit test fixtures remain repe
 
 test('unexpected non-fixture dependencies block deletion and roll back every change', () =>
   isolated(async (tx) => {
-    await tx
-      .insert(offerings)
-      .values({
-        id: '019a7e03-0000-7000-8000-000000000002',
-        organizationId: fixtureId(1000),
-        kind: 'program',
-        slug: 'external-child',
-        name: 'Not a registered fixture',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      })
+    await tx.insert(offerings).values({
+      id: '019a7e03-0000-7000-8000-000000000002',
+      organizationId: fixtureId(1000),
+      kind: 'program',
+      slug: 'external-child',
+      name: 'Not a registered fixture',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    })
     await assert.rejects(() => removeDemoDirectory(tx))
     assert.equal((await tx.select().from(organizations)).length, 10)
     assert.equal((await tx.select().from(offerings)).length, 21)

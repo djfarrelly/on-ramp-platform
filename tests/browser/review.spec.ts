@@ -3,6 +3,7 @@ import AxeBuilder from '@axe-core/playwright'
 import { eq } from 'drizzle-orm'
 import { withDatabase } from '../../src/db/client'
 import { organizations, offerings, events } from '../../src/db/schema'
+import { refreshTagsAfterContentEdit } from '../../src/services/tagging'
 import { localReviewerId } from '../../src/services/ingestion/bootstrap'
 import {
   seedReviewFixtures,
@@ -117,6 +118,14 @@ test('a stale proposal is blocked until the queue is refreshed', async ({
   await expect(
     page.getByRole('button', { name: 'Approve & publish' }),
   ).toBeDisabled()
+  await withDatabase(url, (db) =>
+    refreshTagsAfterContentEdit(
+      db,
+      'organization',
+      ids.organization,
+      localReviewerId,
+    ),
+  )
   await page.getByRole('button', { name: 'Refresh queue' }).click()
   await expect(page.getByRole('alert')).toHaveCount(0)
   await page.getByRole('button', { name: 'Approve & publish' }).click()
@@ -216,6 +225,14 @@ test('a stale inline save preserves the draft and requires refresh', async ({
     page.getByRole('button', { name: 'Save', exact: true }),
   ).toBeDisabled()
   await page.getByRole('button', { name: 'Cancel', exact: true }).click()
+  await withDatabase(url, (db) =>
+    refreshTagsAfterContentEdit(
+      db,
+      'organization',
+      ids.organization,
+      localReviewerId,
+    ),
+  )
   await page.getByRole('button', { name: 'Refresh queue', exact: true }).click()
   await expect(
     page.getByRole('heading', { name: 'Changed elsewhere', exact: true }),
@@ -232,6 +249,9 @@ test.describe('native date editors', () => {
         .update(events)
         .set({ startsAt: new Date('2026-11-20T18:00:00Z') })
         .where(eq(events.id, ids.event)),
+    )
+    await withDatabase(url, (db) =>
+      refreshTagsAfterContentEdit(db, 'event', ids.event, localReviewerId),
     )
     await page.goto('/review')
     await page
@@ -312,6 +332,14 @@ test('loading errors offer a refresh and recover without retrying a decision', a
     'Review queue temporarily unavailable.',
   )
   unavailable = false
+  await withDatabase(url, (db) =>
+    refreshTagsAfterContentEdit(
+      db,
+      'organization',
+      ids.organization,
+      localReviewerId,
+    ),
+  )
   await page.getByRole('button', { name: 'Refresh queue' }).click()
   await expect(
     page.getByText('3 pending proposals.', { exact: true }),
